@@ -1,0 +1,3 @@
+Ada binding to DevIL library.
+
+Depends on gprbuild and devil library.
