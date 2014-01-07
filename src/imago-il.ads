@@ -213,6 +213,54 @@ package Imago.IL is
   IL_LIB_EXR_ERROR                        : constant Enum := 16#05E7#;
   IL_UNKNOWN_ERROR                        : constant Enum := 16#05FF#;
 
+  -- Origin definitions.
+  IL_ORIGIN_SET                           : constant Enum := 16#0600#;
+  IL_ORIGIN_LOWER_LEFT                    : constant Enum := 16#0601#;
+  IL_ORIGIN_UPPER_LEFT                    : constant Enum := 16#0602#;
+  IL_ORIGIN_MODE                          : constant Enum := 16#0603#;
+
+  -- Format and type mode definitions.
+  IL_FORMAT_SET                           : constant Enum := 16#0610#;
+  IL_FORMAT_MODE                          : constant Enum := 16#0611#;
+  IL_TYPE_SET                             : constant Enum := 16#0612#;
+  IL_TYPE_MODE                            : constant Enum := 16#0613#;
+
+  -- File definitions.
+  IL_FILE_OVERWRITE                       : constant Enum := 16#0620#;
+  IL_FILE_MODE                            : constant Enum := 16#0621#;
+
+  -- Palette difinitions.
+  IL_CONV_PAL                             : constant Enum := 16#0630#;
+
+  -- Load fail definitions.
+  IL_DEFAULT_ON_FAIL                      : constant Enum := 16#0632#;
+
+  -- Key colour and alpha definitions.
+  IL_USE_KEY_COLOUR                       : constant Enum := 16#0635#;
+  IL_USE_KEY_COLOR                        : constant Enum := 16#0635#;
+  IL_BLIT_BLEND                           : constant Enum := 16#0636#;
+
+  -- Interlace definitions.
+  IL_SAVE_INTERLACED                      : constant Enum := 16#0639#;
+  IL_INTERLACE_MODE                       : constant Enum := 16#063A#;
+
+  -- Quantization definitions.
+  IL_QUANTIZATION_MODE                    : constant Enum := 16#0640#;
+  IL_WU_QUANT                             : constant Enum := 16#0641#;
+  IL_NEU_QUANT                            : constant Enum := 16#0642#;
+  IL_NEU_QUANT_SAMPLE                     : constant Enum := 16#0643#;
+  IL_MAX_QUANT_INDEXS                     : constant Enum := 16#0644#;
+  IL_MAX_QUANT_INDICES                    : constant Enum := 16#0644#;
+
+  -- Hints.
+  IL_FASTEST                              : constant Enum := 16#0660#;
+  IL_LESS_MEM                             : constant Enum := 16#0661#;
+  IL_DONT_CARE                            : constant Enum := 16#0662#;
+  IL_MEM_SPEED_HINT                       : constant Enum := 16#0665#;
+  IL_USE_COMPRESSION                      : constant Enum := 16#0666#;
+  IL_NO_COMPRESSION                       : constant Enum := 16#0667#;
+  IL_COMPRESSION_HINT                     : constant Enum := 16#0668#;
+
   --------------------------------------------------------------------------
 
 end Imago.IL;
