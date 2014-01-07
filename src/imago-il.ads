@@ -377,4 +377,198 @@ package Imago.IL is
 
   --------------------------------------------------------------------------
 
+  function Active_Face (Number: in UInt) return Bool;
+  function Active_Image (Number: in UInt) return Bool;
+  function Active_Layer (Number: in UInt) return Bool;
+  function Active_Mipmap (Number: in UInt) return Bool;
+  procedure Bind_Image (Image: in UInt);
+  function Blit
+    ( Source: in UInt; DestX: in Int; DestY: in Int; DestZ: in Int;
+      SrcX: in UInt; SrcY: in UInt; SrcZ: in UInt;
+      Width: in UInt; Height: in UInt; Depth: in UInt
+    ) return Bool;
+  function Clamp_NTSC return Bool;
+  procedure Clear_Color
+    ( Red: in ClampF; Green: in ClampF; Blue: in ClampF; Alpha: in ClampF );
+  procedure Clear_Colour
+    ( Red: in ClampF; Green: in ClampF; Blue: in ClampF; Alpha: in ClampF );
+  function Clear_Image return Bool;
+  function Clone_Cur_Image return UInt;
+  function Compress_Func (Mode: in Enum) return Bool;
+  function Convert_Image (Dest_Format: in Enum; Dest_Type: in Enum) return Bool;
+  function Convert_Pal (Dest_Format: in Enum) return Bool;
+  function Copy_Image (Src: in UInt) return Bool;
+  function Create_Sub_Image (Type_Of: in Enum; Num: in UInt) return UInt;
+  function Default_Image return Bool;
+  procedure Delete_Image (Num: in UInt);
+  function Disable (Mode: in Enum) return Bool;
+  function DXTC_Data_To_Image return Bool;
+  function DXTC_Data_To_Surface return Bool;
+  function Enable (Mode: in Enum) return Bool;
+  procedure Flip_Surface_DXTC_Data;
+  function Format_Func (Mode: in Enum) return Bool;
+  function Gen_Image return UInt;
+  procedure Gen_Images (Num: in SizeI; Images: in Pointer);
+  function Get_Boolean (Mode: in Enum) return Bool;
+  function Get_Error return Enum;
+  function Get_Integer (Mode: in Enum) return Int;
+  function Get_Lump_Pos return UInt;
+  procedure Hint (Target: in Enum; Mode: in Enum);
+  function Invert_Surface_DXTC_Data_Alpha return Bool;
+  procedure Init;
+  function Image_To_DXTC_Data (Format: in Enum) return Bool;
+  function Is_Disabled (Mode: in Enum) return Bool;
+  function Is_Enabled (Mode: in Enum) return Bool;
+  function Is_Imaga (Image: in UInt) return Bool;
+  procedure Key_Color
+    ( Red: in ClampF; Green: in ClampF; Blue: in ClampF; Alpha: in ClampF );
+  procedure Key_Colour
+    ( Red: in ClampF; Green: in ClampF; Blue: in ClampF; Alpha: in ClampF );
+  procedure Mod_Alpha (Alpha_Value: in Double);
+  function Original_Func (Mode: in Enum) return Bool;
+  function Overlay_Image
+    ( Source: in UInt;  XCoord: in Int;
+      YCoord: in Int;   ZCoord: in Int
+    ) return Bool;
+  procedure Pop_Attrib;
+  -- NOTE: Type of Bits may need to be changed from UInt to Bitfield
+  procedure Push_Attrib (Bits: in UInt);
+  procedure Register_Format (Format: in Enum);
+  function Register_Mip_Num (Num: in UInt) return Bool;
+  function Register_Num_Faces (Num: in UInt) return Bool;
+  function Register_Num_Images (Num: in UInt) return Bool;
+  procedure Register_Origin (Origin: in Enum);
+  procedure Register_Type (Type_Of: in Enum);
+  procedure Reset_Memory;
+  procedure Reset_Read;
+  procedure Reset_Write;
+  function Set_Alpha (Alpha_Value: in Double) return Bool;
+  function Set_Duration (Duration: in UInt) return Bool;
+  procedure Set_Integer (Mode: in Enum; Param: in Int);
+  procedure Shut_Down;
+  function Surface_To_DXTC_Data (Format: in Enum) return Bool;
+  function Type_Func (Mode: in Enum) return Bool;
+
+-- ILboolean ilApplyPal(ILconst_string FileName);
+-- ILboolean ilApplyProfile(ILstring InProfile, ILstring OutProfile);
+-- ILubyte* ilCompressDXT(ILubyte *Data, ILuint Width, ILuint Height, ILuint Depth, ILenum DXTCFormat, ILuint *DXTCSize);
+-- ILuint    ilCopyPixels(ILuint XOff, ILuint YOff, ILuint ZOff, ILuint Width, ILuint Height, ILuint Depth, ILenum Format, ILenum Type, void *Data);
+-- void      ilDeleteImages(ILsizei Num, const ILuint *Images);
+-- ILenum	ilDetermineType(ILconst_string FileName);
+-- ILenum	ilDetermineTypeF(ILHANDLE File);
+-- ILenum	ilDetermineTypeL(const void *Lump, ILuint Size);
+-- ILubyte* ilGetAlpha(ILenum Type);
+-- void      ilGetBooleanv(ILenum Mode, ILboolean *Param);
+-- ILubyte* ilGetData(void);
+-- ILuint    ilGetDXTCData(void *Buffer, ILuint BufferSize, ILenum DXTCFormat);
+-- void      ilGetIntegerv(ILenum Mode, ILint *Param);
+-- ILubyte* ilGetPalette(void);
+-- ILconst_string  ilGetString(ILenum StringName);
+-- ILboolean ilIsValid(ILenum Type, ILconst_string FileName);
+-- ILboolean ilIsValidF(ILenum Type, ILHANDLE File);
+-- ILboolean ilIsValidL(ILenum Type, void *Lump, ILuint Size);
+-- ILboolean ilLoad(ILenum Type, ILconst_string FileName);
+-- ILboolean ilLoadF(ILenum Type, ILHANDLE File);
+-- ILboolean ilLoadImage(ILconst_string FileName);
+-- ILboolean ilLoadL(ILenum Type, const void *Lump, ILuint Size);
+-- ILboolean ilLoadPal(ILconst_string FileName);
+-- ILboolean ilRegisterLoad(ILconst_string Ext, IL_LOADPROC Load);
+-- void      ilRegisterPal(void *Pal, ILuint Size, ILenum Type);
+-- ILboolean ilRegisterSave(ILconst_string Ext, IL_SAVEPROC Save);
+-- ILboolean ilRemoveLoad(ILconst_string Ext);
+-- ILboolean ilRemoveSave(ILconst_string Ext);
+-- ILboolean ilSave(ILenum Type, ILconst_string FileName);
+-- ILuint    ilSaveF(ILenum Type, ILHANDLE File);
+-- ILboolean ilSaveImage(ILconst_string FileName);
+-- ILuint    ilSaveL(ILenum Type, void *Lump, ILuint Size);
+-- ILboolean ilSavePal(ILconst_string FileName);
+-- ILboolean ilSetData(void *Data);
+-- void      ilSetMemory(mAlloc, mFree);
+-- void      ilSetPixels(ILint XOff, ILint YOff, ILint ZOff, ILuint Width, ILuint Height, ILuint Depth, ILenum Format, ILenum Type, void *Data);
+-- void      ilSetRead(fOpenRProc, fCloseRProc, fEofProc, fGetcProc, fReadProc, fSeekRProc, fTellRProc);
+-- void      ilSetString(ILenum Mode, const char *String);
+-- void      ilSetWrite(fOpenWProc, fCloseWProc, fPutcProc, fSeekWProc, fTellWProc, fWriteProc);
+-- ILboolean ilTexImage(ILuint Width, ILuint Height, ILuint Depth, ILubyte NumChannels, ILenum Format, ILenum Type, void *Data);
+-- ILboolean ilTexImageDxtc(ILint w, ILint h, ILint d, ILenum DxtFormat, const ILubyte* data);
+-- ILenum    ilTypeFromExt(ILconst_string FileName);
+-- ILboolean ilLoadData(ILconst_string FileName, ILuint Width, ILuint Height, ILuint Depth, ILubyte Bpp);
+-- ILboolean ilLoadDataF(ILHANDLE File, ILuint Width, ILuint Height, ILuint Depth, ILubyte Bpp);
+-- ILboolean ilLoadDataL(void *Lump, ILuint Size, ILuint Width, ILuint Height, ILuint Depth, ILubyte Bpp);
+-- ILboolean ilSaveData(ILconst_string FileName);
+
+  --------------------------------------------------------------------------
+
+private
+
+  --------------------------------------------------------------------------
+
+                            -------------------
+                            -- I M P O R T S --
+                            -------------------
+
+  --------------------------------------------------------------------------
+
+  Pragma Import (StdCall, Active_Face, "ilActiveFace");
+  Pragma Import (StdCall, Active_Image, "ilActiveImage");
+  Pragma Import (StdCall, Active_Layer, "ilActiveLayer");
+  Pragma Import (StdCall, Active_Mipmap, "ilActiveMipmap");
+  Pragma Import (StdCall, Bind_Image, "ilBindImage");
+  Pragma Import (StdCall, Blit, "ilBlit");
+  Pragma Import (StdCall, Clamp_NTSC, "ilClampNTSC");
+  Pragma Import (StdCall, Clear_Color, "ilClearColour");
+  Pragma Import (StdCall, Clear_Colour, "ilClearColour");
+  Pragma Import (StdCall, Clear_Image, "ilClearImage");
+  Pragma Import (StdCall, Clone_Cur_Image, "ilCloneCurImage");
+  Pragma Import (StdCall, Compress_Func, "ilCompressFunc");
+  Pragma Import (StdCall, Convert_Image, "ilConvertImage");
+  Pragma Import (StdCall, Convert_Pal, "ilConvertPal");
+  Pragma Import (StdCall, Copy_Image, "ilCopyImage");
+  Pragma Import (StdCall, Create_Sub_Image, "ilCreateSubImage");
+  Pragma Import (StdCall, Default_Image, "ilDefaultImage");
+  Pragma Import (StdCall, Delete_Image, "ilDeleteImage");
+  Pragma Import (StdCall, Disable, "ilDisable");
+  Pragma Import (StdCall, DXTC_Data_To_Image, "ilDxtcDataToImage");
+  Pragma Import (StdCall, DXTC_Data_To_Surface, "ilDxtcDataToSurface");
+  Pragma Import (StdCall, Enable, "ilEnable");
+  Pragma Import (StdCall, Flip_Surface_DXTC_Data, "ilFlipSurfaceDxtcData");
+  Pragma Import (StdCall, Format_Func, "ilFormatFunc");
+  Pragma Import (StdCall, Gen_Image, "ilGenImage");
+  Pragma Import (StdCall, Gen_Images, "ilGenImages");
+  Pragma Import (StdCall, Get_Boolean, "ilGetBoolean");
+  Pragma Import (StdCall, Get_Error, "ilGetError");
+  Pragma Import (StdCall, Get_Integer, "ilGetInteger");
+  Pragma Import (StdCall, Get_Lump_Pos, "ilGetLumpPos");
+  Pragma Import (StdCall, Hint, "ilHint");
+  Pragma Import
+    ( StdCall, Invert_Surface_DXTC_Data_Alpha, "ilInvertSurfaceDxtcDataAlpha" );
+  Pragma Import (StdCall, Init, "ilInit");
+  Pragma Import (StdCall, Image_To_DXTC_Data, "ilImageToDxtcData");  
+  Pragma Import (StdCall, Is_Disabled, "ilIsDisabled");
+  Pragma Import (StdCall, Is_Enabled, "ilIsEnabled");
+  Pragma Import (StdCall, Is_Imaga, "ilIsImage");
+  Pragma Import (StdCall, Key_Color, "ilKeyColour");
+  Pragma Import (StdCall, Key_Colour, "ilKeyColour");
+  Pragma Import (StdCall, Mod_Alpha, "ilModAlpha");
+  Pragma Import (StdCall, Original_Func, "ilOriginFunc");
+  Pragma Import (StdCall, Overlay_Image, "ilOverlayImage");
+  Pragma Import (StdCall, Pop_Attrib, "ilPopAttrib");
+  Pragma Import (StdCall, Push_Attrib, "ilPushAttrib");
+  Pragma Import (StdCall, Register_Format, "ilRegisterFormat");
+  Pragma Import (StdCall, Register_Mip_Num, "ilRegisterMipNum");
+  Pragma Import (StdCall, Register_Num_Faces, "ilRegisterNumFaces");
+  Pragma Import (StdCall, Register_Num_Images, "ilRegisterNumImages");
+  Pragma Import (StdCall, Register_Origin, "ilRegisterOrigin");
+  Pragma Import (StdCall, Register_Type, "ilRegisterType");
+  Pragma Import (StdCall, Reset_Memory, "ilResetMemory");
+  Pragma Import (StdCall, Reset_Read, "ilResetRead");
+  Pragma Import (StdCall, Reset_Write, "ilResetWrite");
+  Pragma Import (StdCall, Set_Alpha, "ilSetAlpha");
+  Pragma Import (StdCall, Set_Duration, "ilSetDuration");
+  Pragma Import (StdCall, Set_Integer, "ilSetInteger");
+  Pragma Import (StdCall, Shut_Down, "ilShutDown");
+  Pragma Import (StdCall, Surface_To_DXTC_Data, "ilSurfaceToDxtcData");
+  Pragma Import (StdCall, Type_Func, "ilTypeFunc");
+
+  --------------------------------------------------------------------------
+
 end Imago.IL;
