@@ -381,6 +381,12 @@ package Imago.IL is
   function Active_Image (Number: in UInt) return Bool;
   function Active_Layer (Number: in UInt) return Bool;
   function Active_Mipmap (Number: in UInt) return Bool;
+  function Apply_Pal (File_Name: in String) return Bool;
+  -- NOTE: Is this correct way to bind to this function?
+  --       Probably not, but will try fixing it once something breaks over this.
+  function Apply_Profile
+    ( In_Profile: in String; Out_Profile: in String
+    ) return Bool;
   procedure Bind_Image (Image: in UInt);
   function Blit
     ( Source: in UInt; DestX: in Int; DestY: in Int; DestZ: in Int;
@@ -408,6 +414,7 @@ package Imago.IL is
   procedure Delete_Image (Num: in UInt);
   procedure Delete_Images (Num: in SizeI; Images: in Pointer);
   -- TODO: Overload Determine_Type instead of using Determine_Type{L,F,}
+  function Determine_Type (File_Name: in String) return Enum;
   function Determine_TypeL (Lump: in Pointer; Size: in UInt) return Enum;
   function Disable (Mode: in Enum) return Bool;
   function DXTC_Data_To_Image return Bool;
@@ -428,6 +435,7 @@ package Imago.IL is
   function Get_Integer (Mode: in Enum) return Int;
   procedure Get_IntegerV (Mode: in Enum; Param: in Pointer);
   function Get_Lump_Pos return UInt;
+  function Get_String (String_Name: in Enum) return String;
   -- TODO: Overload Load_Data insetad of using Load_Data{L,F,}
   function Load_DataL
     ( Lump: in Pointer; Size: in UInt;
@@ -442,6 +450,7 @@ package Imago.IL is
   function Is_Enabled (Mode: in Enum) return Bool;
   function Is_Imaga (Image: in UInt) return Bool;
   -- TODO: Overload Is_Valid instead of using Is_Valid{F,L,}
+  function Is_Valid (Type_Of: in Enum; File_Name: in String) return Bool;
   function Is_ValidL
     ( Type_Of: in Enum; Lump: in Pointer; Size: in UInt
     ) return Bool;
@@ -450,9 +459,17 @@ package Imago.IL is
   procedure Key_Colour
     ( Red: in ClampF; Green: in ClampF; Blue: in ClampF; Alpha: in ClampF );
   -- TODO: Overload Load instead of using Load{L,F,}
+  function Load (Type_Of: in Enum; File_Name: in String) return Bool;
   function LoadL
     ( Type_Of: in Enum; Lump: in Pointer; Size: in UInt
     ) return Bool;
+  function Load_Data
+    ( File_Name: in String;
+      Width: in UInt; Height: in UInt;
+      Depth: in UInt; BPP: in UByte
+    ) return Bool;
+  function Load_Image (File_Name: in String) return Bool;
+  function Load_Pal (File_Name: in String) return Bool;
   procedure Mod_Alpha (Alpha_Value: in Double);
   function Original_Func (Mode: in Enum) return Bool;
   function Overlay_Image
@@ -469,13 +486,19 @@ package Imago.IL is
   procedure Register_Origin (Origin: in Enum);
   procedure Register_Pal (Pal: in Pointer; Size: in UInt; Type_Of: in Enum);
   procedure Register_Type (Type_Of: in Enum);
+  function Remove_Load (Ext: in String) return Bool;
+  function Remove_Save (Ext: in String) return Bool;
   procedure Reset_Memory;
   procedure Reset_Read;
   procedure Reset_Write;
   -- TODO: Overload Save instead of using Save{L,F,}
+  function Save (Type_Of: in Enum; File_Name: in String) return Bool;
   function SaveL
     ( Type_Of: in Enum; Lump: in Pointer; Size: in UInt
     ) return UInt;
+  function Save_Data (File_Name: in String) return Bool;
+  function Save_Image (File_Name: in String) return Bool;
+  function Save_Pal (File_Name: in String) return Bool;
   function Set_Alpha (Alpha_Value: in Double) return Bool;
   function Set_Data (Data: in Pointer) return Bool;
   function Set_Duration (Duration: in UInt) return Bool;
@@ -495,39 +518,24 @@ package Imago.IL is
   function Tex_Image_DXTC
     ( W: in Int; H: in Int; D: in Int; DXT_Format: in Enum; Data: in Pointer
     ) return Bool;
+  function Type_From_Ext (File_Name: in String) return Enum;
   function Type_Func (Mode: in Enum) return Bool;
 
--- ILboolean ilApplyPal(ILconst_string FileName);
--- ILboolean ilApplyProfile(ILstring InProfile, ILstring OutProfile);
 -- ILubyte* ilCompressDXT(ILubyte *Data, ILuint Width, ILuint Height, ILuint Depth, ILenum DXTCFormat, ILuint *DXTCSize);
--- ILenum	ilDetermineType(ILconst_string FileName);
 -- ILenum	ilDetermineTypeF(ILHANDLE File);
 -- ILubyte* ilGetAlpha(ILenum Type);
 -- ILubyte* ilGetData(void);
 -- ILubyte* ilGetPalette(void);
--- ILconst_string  ilGetString(ILenum StringName);
--- ILboolean ilIsValid(ILenum Type, ILconst_string FileName);
 -- ILboolean ilIsValidF(ILenum Type, ILHANDLE File);
--- ILboolean ilLoad(ILenum Type, ILconst_string FileName);
 -- ILboolean ilLoadF(ILenum Type, ILHANDLE File);
--- ILboolean ilLoadImage(ILconst_string FileName);
--- ILboolean ilLoadPal(ILconst_string FileName);
 -- ILboolean ilRegisterLoad(ILconst_string Ext, IL_LOADPROC Load);
 -- ILboolean ilRegisterSave(ILconst_string Ext, IL_SAVEPROC Save);
--- ILboolean ilRemoveLoad(ILconst_string Ext);
--- ILboolean ilRemoveSave(ILconst_string Ext);
--- ILboolean ilSave(ILenum Type, ILconst_string FileName);
 -- ILuint    ilSaveF(ILenum Type, ILHANDLE File);
--- ILboolean ilSaveImage(ILconst_string FileName);
--- ILboolean ilSavePal(ILconst_string FileName);
 -- void      ilSetMemory(mAlloc, mFree);
 -- void      ilSetRead(fOpenRProc, fCloseRProc, fEofProc, fGetcProc, fReadProc, fSeekRProc, fTellRProc);
 -- void      ilSetString(ILenum Mode, const char *String);
 -- void      ilSetWrite(fOpenWProc, fCloseWProc, fPutcProc, fSeekWProc, fTellWProc, fWriteProc);
--- ILenum    ilTypeFromExt(ILconst_string FileName);
--- ILboolean ilLoadData(ILconst_string FileName, ILuint Width, ILuint Height, ILuint Depth, ILubyte Bpp);
 -- ILboolean ilLoadDataF(ILHANDLE File, ILuint Width, ILuint Height, ILuint Depth, ILubyte Bpp);
--- ILboolean ilSaveData(ILconst_string FileName);
 
   --------------------------------------------------------------------------
 
