@@ -124,6 +124,56 @@ package body Imago.IL is
 
   --------------------------------------------------------------------------
 
+  function Determine_Type (Lump: in Pointer; Size: in UInt) return Enum
+  is
+    function ilDetermineTypeL (Lump: in Pointer; Size: in UInt) return Enum;
+    Pragma Import (StdCall, ilDetermineTypeL, "ilDetermineTypeL");
+  begin
+    return ilDetermineTypeL (Lump, Size);
+  end Determine_Type;
+
+  --------------------------------------------------------------------------
+
+  function Get_Boolean (Mode: in Enum) return Bool
+  is
+    function ilGetBoolean (Mode: in Enum) return Bool;
+    Pragma Import (StdCall, ilGetBoolean, "ilGetBoolean");
+  begin
+    return ilGetBoolean (Mode);
+  end Get_Boolean;
+
+  --------------------------------------------------------------------------
+
+  procedure Get_Boolean (Mode: in Enum; Param: in Pointer)
+  is
+    procedure ilGetBooleanV (Mode: in Enum; Param: in Pointer);
+    Pragma Import (StdCall, ilGetBooleanV, "ilGetBooleanv");
+  begin
+    ilGetBooleanV (Mode, Param);
+  end Get_Boolean;
+
+  --------------------------------------------------------------------------
+
+  function Get_Integer (Mode: in Enum) return Int
+  is
+    function ilGetInteger (Mode: in Enum) return Int;
+    Pragma Import (StdCall, ilGetInteger, "ilGetInteger");
+  begin
+    return ilGetInteger (Mode);
+  end Get_Integer;
+
+  --------------------------------------------------------------------------
+
+  procedure Get_Integer (Mode: in Enum; Param: in Pointer)
+  is
+    procedure ilGetIntegerV (Mode: in Enum; Param: in Pointer);
+    Pragma Import (StdCall, ilGetIntegerV, "ilGetIntegerv");
+  begin
+    ilGetIntegerV (Mode, Param);
+  end Get_Integer;
+
+  --------------------------------------------------------------------------
+
   function Get_String (String_Name: in Enum) return String
   is
     function ilGetString (String_Name: in Enum) return CStrings.chars_ptr;
@@ -136,9 +186,7 @@ package body Imago.IL is
 
   function Is_Valid (Type_Of: in Enum; File_Name: in String) return Bool
   is
-    function ilIsValid
-      ( Type_Of: in Enum; FileName: in CStrings.chars_ptr
-      ) return Bool;
+    function ilIsValid (T: in Enum; F: in CStrings.chars_ptr) return Bool;
     Pragma Import (StdCall, ilIsValid, "ilIsValid");
 
     Success: Bool;
@@ -153,11 +201,21 @@ package body Imago.IL is
 
   --------------------------------------------------------------------------
 
+  function Is_Valid
+    ( Type_Of: in Enum; Lump: in Pointer; Size: in UInt
+    ) return Bool
+  is
+    function ilIsValidL (T: in Enum; L: in Pointer; S: in UInt) return Bool;
+    Pragma Import (StdCall, ilIsValidL, "ilIsValidL");
+  begin
+    return ilIsValidL (Type_Of, Lump, Size);
+  end Is_Valid;
+
+  --------------------------------------------------------------------------
+
   function Load (Type_Of: in Enum; File_Name: in String) return Bool
   is
-    function ilLoad
-      ( Type_Of: in Enum; FileName: in CStrings.chars_ptr
-      ) return Bool;
+    function ilLoad (T: in Enum; F: in CStrings.chars_ptr) return Bool;
     Pragma Import (StdCall, ilLoad, "ilLoad");
 
     Success: Bool;
@@ -168,6 +226,16 @@ package body Imago.IL is
     Success := ilLoad (Type_Of, CStrings.To_Chars_Ptr (CString));
     Free (CString);
     return Success;
+  end Load;
+
+  --------------------------------------------------------------------------
+
+  function Load (Type_Of: in Enum; Lump: in Pointer; Size: in UInt) return Bool
+  is
+    function ilLoadL (T: in Enum; L: in Pointer; S: in UInt) return Bool;
+    Pragma Import (StdCall, ilLoadL, "ilLoadL");
+  begin
+    return ilLoadL (Type_Of, Lump, Size);
   end Load;
 
   --------------------------------------------------------------------------
@@ -194,6 +262,23 @@ package body Imago.IL is
       ilLoadData (CStrings.To_Chars_Ptr (CString), Width, Height, Depth, BPP);
     Free (CString);
     return Success;
+  end Load_Data;
+
+  --------------------------------------------------------------------------
+
+  function Load_Data
+    ( Lump: in Pointer; Size: in UInt;
+      Width: in UInt; Height: in UInt;
+      Depth: in UInt; BPP: in UByte
+    ) return Bool
+  is
+    function ilLoadDataL
+      ( L: in Pointer; S: in UInt; W: in UInt;
+        H: in UInt; D: in UInt; B: in UByte
+      ) return Bool;
+    Pragma Import (StdCall, ilLoadDataL, "ilLoadDataL");
+  begin
+    return ilLoadDataL (Lump, Size, Width, Height, Depth, BPP);
   end Load_Data;
 
   --------------------------------------------------------------------------
@@ -281,6 +366,18 @@ package body Imago.IL is
     Success := ilSave (Type_Of, CStrings.To_Chars_Ptr (CString));
     Free (CString);
     return Success;
+  end Save;
+
+  --------------------------------------------------------------------------
+
+  function Save
+    ( Type_Of: in Enum; Lump: in Pointer; Size: in UInt
+    ) return UInt
+  is
+    function ilSaveL (T: in Enum; L: in Pointer; S: in UInt) return UInt;
+    Pragma Import (StdCall, ilSaveL, "ilSaveL");
+  begin
+    return ilSaveL (Type_Of, Lump, Size);
   end Save;
 
   --------------------------------------------------------------------------

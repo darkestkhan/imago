@@ -366,8 +366,8 @@ package Imago.IL is
 
   --------------------------------------------------------------------------
 
-  -- NOTE/FIXME/TODO: typedefs of pointers to functions are not bound.
-  --                  Not sure if they are used in API or just internally.
+  -- FIXME/TODO:  typedefs of pointers to functions are not bound.
+  --              This is preventing against binding to last functions.
 
   --------------------------------------------------------------------------
 
@@ -413,9 +413,8 @@ package Imago.IL is
   function Default_Image return Bool;
   procedure Delete_Image (Num: in UInt);
   procedure Delete_Images (Num: in SizeI; Images: in Pointer);
-  -- TODO: Overload Determine_Type instead of using Determine_Type{L,F,}
   function Determine_Type (File_Name: in String) return Enum;
-  function Determine_TypeL (Lump: in Pointer; Size: in UInt) return Enum;
+  function Determine_Type (Lump: in Pointer; Size: in UInt) return Enum;
   function Disable (Mode: in Enum) return Bool;
   function DXTC_Data_To_Image return Bool;
   function DXTC_Data_To_Surface return Bool;
@@ -424,24 +423,16 @@ package Imago.IL is
   function Format_Func (Mode: in Enum) return Bool;
   function Gen_Image return UInt;
   procedure Gen_Images (Num: in SizeI; Images: in Pointer);
-  -- TODO: Overload Get_Boolean instead of using Get_Boolean{V,}
   function Get_Boolean (Mode: in Enum) return Bool;
-  procedure Get_BooleanV (Mode: in Enum; Param: in Pointer);
+  procedure Get_Boolean (Mode: in Enum; Param: in Pointer);
   function Get_DXTC_Data
     ( Buffer: in Pointer; Buffer_Size: in UInt; DXTC_Format: in Enum
     ) return UInt;
   function Get_Error return Enum;
-  -- TODO: Overload Get_Integer instead of using Get_Integer{V,}
   function Get_Integer (Mode: in Enum) return Int;
-  procedure Get_IntegerV (Mode: in Enum; Param: in Pointer);
+  procedure Get_Integer (Mode: in Enum; Param: in Pointer);
   function Get_Lump_Pos return UInt;
   function Get_String (String_Name: in Enum) return String;
-  -- TODO: Overload Load_Data insetad of using Load_Data{L,F,}
-  function Load_DataL
-    ( Lump: in Pointer; Size: in UInt;
-      Width: in UInt; Height: in UInt;
-      Depth: in UInt; BPP: in UByte
-    ) return Bool;
   procedure Hint (Target: in Enum; Mode: in Enum);
   function Invert_Surface_DXTC_Data_Alpha return Bool;
   procedure Init;
@@ -449,22 +440,25 @@ package Imago.IL is
   function Is_Disabled (Mode: in Enum) return Bool;
   function Is_Enabled (Mode: in Enum) return Bool;
   function Is_Imaga (Image: in UInt) return Bool;
-  -- TODO: Overload Is_Valid instead of using Is_Valid{F,L,}
   function Is_Valid (Type_Of: in Enum; File_Name: in String) return Bool;
-  function Is_ValidL
+  function Is_Valid
     ( Type_Of: in Enum; Lump: in Pointer; Size: in UInt
     ) return Bool;
   procedure Key_Color
     ( Red: in ClampF; Green: in ClampF; Blue: in ClampF; Alpha: in ClampF );
   procedure Key_Colour
     ( Red: in ClampF; Green: in ClampF; Blue: in ClampF; Alpha: in ClampF );
-  -- TODO: Overload Load instead of using Load{L,F,}
   function Load (Type_Of: in Enum; File_Name: in String) return Bool;
-  function LoadL
+  function Load
     ( Type_Of: in Enum; Lump: in Pointer; Size: in UInt
     ) return Bool;
   function Load_Data
     ( File_Name: in String;
+      Width: in UInt; Height: in UInt;
+      Depth: in UInt; BPP: in UByte
+    ) return Bool;
+  function Load_Data
+    ( Lump: in Pointer; Size: in UInt;
       Width: in UInt; Height: in UInt;
       Depth: in UInt; BPP: in UByte
     ) return Bool;
@@ -491,9 +485,8 @@ package Imago.IL is
   procedure Reset_Memory;
   procedure Reset_Read;
   procedure Reset_Write;
-  -- TODO: Overload Save instead of using Save{L,F,}
   function Save (Type_Of: in Enum; File_Name: in String) return Bool;
-  function SaveL
+  function Save
     ( Type_Of: in Enum; Lump: in Pointer; Size: in UInt
     ) return UInt;
   function Save_Data (File_Name: in String) return Bool;
@@ -569,7 +562,6 @@ private
   Pragma Import (StdCall, Default_Image, "ilDefaultImage");
   Pragma Import (StdCall, Delete_Image, "ilDeleteImage");
   Pragma Import (StdCall, Delete_Images, "ilDeleteImages");
-  Pragma Import (StdCall, Determine_TypeL, "ilDetermineTypeL");
   Pragma Import (StdCall, Disable, "ilDisable");
   Pragma Import (StdCall, DXTC_Data_To_Image, "ilDxtcDataToImage");
   Pragma Import (StdCall, DXTC_Data_To_Surface, "ilDxtcDataToSurface");
@@ -578,12 +570,8 @@ private
   Pragma Import (StdCall, Format_Func, "ilFormatFunc");
   Pragma Import (StdCall, Gen_Image, "ilGenImage");
   Pragma Import (StdCall, Gen_Images, "ilGenImages");
-  Pragma Import (StdCall, Get_Boolean, "ilGetBoolean");
-  Pragma Import (StdCall, Get_BooleanV, "ilGetBooleanv");
   Pragma Import (StdCall, Get_DXTC_Data, "ilGetDXTCData");
   Pragma Import (StdCall, Get_Error, "ilGetError");
-  Pragma Import (StdCall, Get_Integer, "ilGetInteger");
-  Pragma Import (StdCall, Get_IntegerV, "ilGetIntegerv");
   Pragma Import (StdCall, Get_Lump_Pos, "ilGetLumpPos");
   Pragma Import (StdCall, Hint, "ilHint");
   Pragma Import
@@ -593,11 +581,8 @@ private
   Pragma Import (StdCall, Is_Disabled, "ilIsDisabled");
   Pragma Import (StdCall, Is_Enabled, "ilIsEnabled");
   Pragma Import (StdCall, Is_Imaga, "ilIsImage");
-  Pragma Import (StdCall, Is_ValidL, "ilIsValidL");
   Pragma Import (StdCall, Key_Color, "ilKeyColour");
   Pragma Import (StdCall, Key_Colour, "ilKeyColour");
-  Pragma Import (StdCall, Load_DataL, "ilLoadDataL");
-  Pragma Import (StdCall, LoadL, "ilLoadL");
   Pragma Import (StdCall, Mod_Alpha, "ilModAlpha");
   Pragma Import (StdCall, Original_Func, "ilOriginFunc");
   Pragma Import (StdCall, Overlay_Image, "ilOverlayImage");
@@ -613,7 +598,6 @@ private
   Pragma Import (StdCall, Reset_Memory, "ilResetMemory");
   Pragma Import (StdCall, Reset_Read, "ilResetRead");
   Pragma Import (StdCall, Reset_Write, "ilResetWrite");
-  Pragma Import (StdCall, SaveL, "ilSaveL");
   Pragma Import (StdCall, Set_Alpha, "ilSetAlpha");
   Pragma Import (StdCall, Set_Data, "ilSetData");
   Pragma Import (StdCall, Set_Duration, "ilSetDuration");
