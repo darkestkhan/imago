@@ -463,6 +463,8 @@ package Imago.IL is
   procedure Get_Boolean (Mode: in Enum; Param: in Pointer);
   Pragma Inline (Get_Boolean);
 
+  function Get_Data return Pointer;
+
   function Get_DXTC_Data
     ( Buffer: in Pointer; Buffer_Size: in UInt; DXTC_Format: in Enum
     ) return UInt;
@@ -625,7 +627,6 @@ package Imago.IL is
 -- ILubyte* ilCompressDXT(ILubyte *Data, ILuint Width, ILuint Height, ILuint Depth, ILenum DXTCFormat, ILuint *DXTCSize);
 -- ILenum	ilDetermineTypeF(ILHANDLE File);
 -- ILubyte* ilGetAlpha(ILenum Type);
--- ILubyte* ilGetData(void);
 -- ILubyte* ilGetPalette(void);
 -- ILboolean ilIsValidF(ILenum Type, ILHANDLE File);
 -- ILboolean ilLoadF(ILenum Type, ILHANDLE File);
@@ -678,6 +679,7 @@ private
   Pragma Import (StdCall, Format_Func, "ilFormatFunc");
   Pragma Import (StdCall, Gen_Image, "ilGenImage");
   Pragma Import (StdCall, Gen_Images, "ilGenImages");
+  Pragma Import (StdCall, Get_Data, "ilGetData");
   Pragma Import (StdCall, Get_DXTC_Data, "ilGetDXTCData");
   Pragma Import (StdCall, Get_Error, "ilGetError");
   Pragma Import (StdCall, Get_Lump_Pos, "ilGetLumpPos");

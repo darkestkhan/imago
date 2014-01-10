@@ -94,5 +94,17 @@ package Imago.Binary is
   for S_Long'Size   use Long_Bits;
 
   --------------------------------------------------------------------------
+  -- Array types.
+  type Byte_Array     is array (Natural range <>) of Byte;
+  type Short_Array    is array (Natural range <>) of Byte;
+  type Word_Array     is array (Natural range <>) of Word;
+  type Long_Array     is array (Natural range <>) of Long;
+
+  type S_Byte_Array   is array (Natural range <>) of S_Byte;
+  type S_Short_Array  is array (Natural range <>) of S_Short;
+  type S_Word_Array   is array (Natural range <>) of S_Word;
+  type S_Long_Array   is array (Natural range <>) of S_Long;
+
+  ---------------------------------------------------------------------------
 
 end Imago.Binary;

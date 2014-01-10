@@ -2,6 +2,8 @@
 
 Depends on gprbuild (may build with gnatmake but not tested) and devil library.
 
+When linking against devil don't forget to add "-lIL" and "-lILU" flags.
+
 Following subprograms (+ entire ilut.h) are still not bound:
   ILubyte* ilCompressDXT(ILubyte *Data, ILuint Width, ILuint Height, ILuint Depth, ILenum DXTCFormat, ILuint *DXTCSize);
   ILenum	ilDetermineTypeF(ILHANDLE File);
