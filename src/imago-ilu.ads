@@ -101,74 +101,132 @@ package Imago.ILU is
   --------------------------------------------------------------------------
 
   function Alienify return IL.Bool;
+
   function Blur_Avg (Iter: in IL.UInt) return IL.Bool;
+
   function Blur_Gaussian (Iter: in IL.UInt) return IL.Bool;
+
   function Build_Mipmaps return IL.Bool;
+
   function Colors_Used return IL.UInt;
+
   function Colours_Used return IL.UInt;
+
   function Compare_Image (Comp: in IL.UInt) return IL.Bool;
+
   function Contrast (Contrats: in Float) return IL.Bool;
+
   function Crop
     ( XOff: in IL.UInt; YOff: in IL.UInt; ZOff: in IL.UInt;
       Width: in IL.UInt; Height: in IL.UInt; Depth: in IL.UInt
     ) return IL.Bool;
+
   procedure Delete_Image (ID: in IL.UInt);
+
   function Edge_Detect_E return IL.Bool;
+
   function Edge_Detect_P return IL.Bool;
+
   function Edge_Detect_S return IL.Bool;
+
   function Emboss return IL.Bool;
+
   function Enlarge_Canvas
     ( Width: in IL.UInt; Height: in IL.UInt; Depth: in IL.UInt
     ) return IL.Bool;
+
   function Enlarge_Image
     ( XDim: in Float; YDim: in Float; ZDim: in Float
     ) return IL.Bool;
+
+  function Error_String (String_Name: in IL.Enum) return String;
+  Pragma Inline (Error_String);
+
   function Equalize return IL.Bool;
+
   function Convolution
     ( Matrix: in IL.Pointer; Scale: in IL.Int; Bias: in IL.Int
     ) return IL.Bool;
+
   function Flip_Image return IL.Bool;
+
   function Gamma_Correct (Gamma: in Float) return IL.Bool;
+
   function Gen_Image return IL.UInt;
+
+  function  Get_Integer (Mode: in IL.Enum) return IL.Int;
+
+  procedure Get_Integer (Mode: in IL.Enum; Param: in IL.Pointer);
+  Pragma Inline (Get_Integer);
+
+  function Get_String (String_Name: in IL.Enum) return String;
+  Pragma Inline (Get_String);
+
   procedure Image_Parameter (P_Name: in IL.Enum; Param: in IL.Enum);
+
   procedure Init;
+
   function Invert_Alpha return IL.Bool;
+
+  function Load_Image (File_Name: in String) return IL.UInt;
+  Pragma Inline (Load_Image);
+
   function Mirror return IL.Bool;
+
   function Negative return IL.Bool;
+
   function Noisify (Tolerance: in IL.ClampF) return IL.Bool;
+
   function Pixelize (Pix_Size: in IL.UInt) return IL.Bool;
+
   function Replace_Color
     ( Red: in IL.UByte; Green: in IL.UByte;
       Blue: in IL.UByte; Tolerance: in Float
     ) return IL.Bool;
+
   function Replace_Colour
     ( Red: in IL.UByte; Green: in IL.UByte;
       Blue: in IL.UByte; Tolerance: in Float
     ) return IL.Bool;
+
+  function Rotate (Angle: in Float) return IL.Bool;
+
+  function Rotate
+    ( X: in Float; Y: in Float; Z: in Float; Angle: in Float
+    ) return IL.Bool;
+  Pragma Inline (Rotate);
+
+  function Saturate (Saturation: in Float) return IL.Bool;
+
+  function Saturate
+    ( R: in Float; G: in Float; B: in Float; Saturation: in Float
+    ) return IL.Bool;
+  Pragma Inline (Saturate);
+
   function Scale
     ( Width: in IL.UInt; Height: in IL.UInt; Depth: in IL.UInt
     ) return IL.Bool;
+
   function Scale_Alpha (Scale: in Float) return IL.Bool;
+
   function Scale_Colors (R: in Float; G: in Float; B: in Float) return IL.Bool;
+
   function Scale_Colours (R: in Float; G: in Float; B: in Float) return IL.Bool;
+
   function Set_Language (Language: in IL.Enum) return IL.Bool;
+
   function Sharpen (Factor: in Float; Iter: in IL.UInt) return IL.Bool;
+
   function Swap_Colors return IL.Bool;
+
   function Swap_Colours return IL.Bool;
+
   function Wave (Angle: in Float) return IL.Bool;
 
--- ILconst_string 		 iluErrorString(ILenum Error);
+-- Unbound subprograms:
 -- void           iluGetImageInfo(ILinfo *Info);
--- ILint          iluGetInteger(ILenum Mode);
--- void           iluGetIntegerv(ILenum Mode, ILint *Param);
--- ILstring 		 iluGetString(ILenum StringName);
--- ILuint         iluLoadImage(ILconst_string FileName);
 -- void           iluRegionfv(ILpointf *Points, ILuint n);
 -- void           iluRegioniv(ILpointi *Points, ILuint n);
--- ILboolean      iluRotate(ILfloat Angle);
--- ILboolean      iluRotate3D(ILfloat x, ILfloat y, ILfloat z, ILfloat Angle);
--- ILboolean      iluSaturate1f(ILfloat Saturation);
--- ILboolean      iluSaturate4f(ILfloat r, ILfloat g, ILfloat b, ILfloat Saturation);
 
   --------------------------------------------------------------------------
 
