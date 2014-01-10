@@ -8,7 +8,6 @@ Following subprograms (+ entire ilut.h) are still not bound:
   ILubyte* ilCompressDXT(ILubyte *Data, ILuint Width, ILuint Height, ILuint Depth, ILenum DXTCFormat, ILuint *DXTCSize);
   ILenum	ilDetermineTypeF(ILHANDLE File);
   ILubyte* ilGetAlpha(ILenum Type);
-  ILubyte* ilGetData(void);
   ILubyte* ilGetPalette(void);
   ILboolean ilIsValidF(ILenum Type, ILHANDLE File);
   ILboolean ilLoadF(ILenum Type, ILHANDLE File);
