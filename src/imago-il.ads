@@ -378,142 +378,250 @@ package Imago.IL is
   --------------------------------------------------------------------------
 
   function Active_Face (Number: in UInt) return Bool;
+
   function Active_Image (Number: in UInt) return Bool;
+
   function Active_Layer (Number: in UInt) return Bool;
+
   function Active_Mipmap (Number: in UInt) return Bool;
+
   function Apply_Pal (File_Name: in String) return Bool;
+  Pragma Inline (Apply_Pal);
+
   -- NOTE: Is this correct way to bind to this function?
   --       Probably not, but will try fixing it once something breaks over this.
   function Apply_Profile
     ( In_Profile: in String; Out_Profile: in String
     ) return Bool;
+  Pragma Inline (Apply_Profile);
+
   procedure Bind_Image (Image: in UInt);
+
   function Blit
     ( Source: in UInt; DestX: in Int; DestY: in Int; DestZ: in Int;
       SrcX: in UInt; SrcY: in UInt; SrcZ: in UInt;
       Width: in UInt; Height: in UInt; Depth: in UInt
     ) return Bool;
+
   function Clamp_NTSC return Bool;
+
   procedure Clear_Color
     ( Red: in ClampF; Green: in ClampF; Blue: in ClampF; Alpha: in ClampF );
+
   procedure Clear_Colour
     ( Red: in ClampF; Green: in ClampF; Blue: in ClampF; Alpha: in ClampF );
+
   function Clear_Image return Bool;
+
   function Clone_Cur_Image return UInt;
+
   function Compress_Func (Mode: in Enum) return Bool;
+
   function Convert_Image (Dest_Format: in Enum; Dest_Type: in Enum) return Bool;
+
   function Convert_Pal (Dest_Format: in Enum) return Bool;
+
   function Copy_Image (Src: in UInt) return Bool;
+
   function Copy_Pixels
     ( XOff: in UInt; YOff: in UInt; ZOff: in UInt;
       Width: in UInt; Height: in UInt; Depth: in UInt;
       Format: in Enum; Type_Of: in Enum; Data: in Pointer
     ) return UInt;
+
   function Create_Sub_Image (Type_Of: in Enum; Num: in UInt) return UInt;
+
   function Default_Image return Bool;
+
   procedure Delete_Image (Num: in UInt);
+
   procedure Delete_Images (Num: in SizeI; Images: in Pointer);
+
   function Determine_Type (File_Name: in String) return Enum;
+
   function Determine_Type (Lump: in Pointer; Size: in UInt) return Enum;
+  Pragma Inline (Determine_Type);
+
   function Disable (Mode: in Enum) return Bool;
+
   function DXTC_Data_To_Image return Bool;
+
   function DXTC_Data_To_Surface return Bool;
+
   function Enable (Mode: in Enum) return Bool;
+
   procedure Flip_Surface_DXTC_Data;
+
   function Format_Func (Mode: in Enum) return Bool;
+
   function Gen_Image return UInt;
+
   procedure Gen_Images (Num: in SizeI; Images: in Pointer);
+
   function Get_Boolean (Mode: in Enum) return Bool;
+
   procedure Get_Boolean (Mode: in Enum; Param: in Pointer);
+  Pragma Inline (Get_Boolean);
+
   function Get_DXTC_Data
     ( Buffer: in Pointer; Buffer_Size: in UInt; DXTC_Format: in Enum
     ) return UInt;
+
   function Get_Error return Enum;
+
   function Get_Integer (Mode: in Enum) return Int;
+
   procedure Get_Integer (Mode: in Enum; Param: in Pointer);
+  Pragma Inline (Get_Integer);
+
   function Get_Lump_Pos return UInt;
+
   function Get_String (String_Name: in Enum) return String;
+  Pragma Inline (Get_String);
+
   procedure Hint (Target: in Enum; Mode: in Enum);
+
   function Invert_Surface_DXTC_Data_Alpha return Bool;
+
   procedure Init;
+
   function Image_To_DXTC_Data (Format: in Enum) return Bool;
+
   function Is_Disabled (Mode: in Enum) return Bool;
+
   function Is_Enabled (Mode: in Enum) return Bool;
+
   function Is_Imaga (Image: in UInt) return Bool;
+
   function Is_Valid (Type_Of: in Enum; File_Name: in String) return Bool;
+
   function Is_Valid
     ( Type_Of: in Enum; Lump: in Pointer; Size: in UInt
     ) return Bool;
+  Pragma Inline (Is_Valid);
+
   procedure Key_Color
     ( Red: in ClampF; Green: in ClampF; Blue: in ClampF; Alpha: in ClampF );
+
   procedure Key_Colour
     ( Red: in ClampF; Green: in ClampF; Blue: in ClampF; Alpha: in ClampF );
+
   function Load (Type_Of: in Enum; File_Name: in String) return Bool;
+
   function Load
     ( Type_Of: in Enum; Lump: in Pointer; Size: in UInt
     ) return Bool;
+  Pragma Inline (Load);
+
   function Load_Data
     ( File_Name: in String;
       Width: in UInt; Height: in UInt;
       Depth: in UInt; BPP: in UByte
     ) return Bool;
+
   function Load_Data
     ( Lump: in Pointer; Size: in UInt;
       Width: in UInt; Height: in UInt;
       Depth: in UInt; BPP: in UByte
     ) return Bool;
+  Pragma Inline (Load_Data);
+
   function Load_Image (File_Name: in String) return Bool;
+  Pragma Inline (Load_Image);
+
   function Load_Pal (File_Name: in String) return Bool;
+  Pragma Inline (Load_Pal);
+
   procedure Mod_Alpha (Alpha_Value: in Double);
+
   function Original_Func (Mode: in Enum) return Bool;
+
   function Overlay_Image
     ( Source: in UInt;  XCoord: in Int;
       YCoord: in Int;   ZCoord: in Int
     ) return Bool;
+
   procedure Pop_Attrib;
+
   -- NOTE: Type of Bits may need to be changed from UInt to Bitfield
   procedure Push_Attrib (Bits: in UInt);
+
   procedure Register_Format (Format: in Enum);
+
   function Register_Mip_Num (Num: in UInt) return Bool;
+
   function Register_Num_Faces (Num: in UInt) return Bool;
+
   function Register_Num_Images (Num: in UInt) return Bool;
+
   procedure Register_Origin (Origin: in Enum);
+
   procedure Register_Pal (Pal: in Pointer; Size: in UInt; Type_Of: in Enum);
+
   procedure Register_Type (Type_Of: in Enum);
+
   function Remove_Load (Ext: in String) return Bool;
+  Pragma Inline (Remove_Load);
+
   function Remove_Save (Ext: in String) return Bool;
+  Pragma Inline (Remove_Save);
+
   procedure Reset_Memory;
+
   procedure Reset_Read;
+
   procedure Reset_Write;
+
   function Save (Type_Of: in Enum; File_Name: in String) return Bool;
+
   function Save
     ( Type_Of: in Enum; Lump: in Pointer; Size: in UInt
     ) return UInt;
+  Pragma Inline (Save);
+
   function Save_Data (File_Name: in String) return Bool;
+  Pragma Inline (Save_Data);
+
   function Save_Image (File_Name: in String) return Bool;
+  Pragma Inline (Save_Image);
+
   function Save_Pal (File_Name: in String) return Bool;
+  Pragma Inline (Save_Pal);
+
   function Set_Alpha (Alpha_Value: in Double) return Bool;
+
   function Set_Data (Data: in Pointer) return Bool;
+
   function Set_Duration (Duration: in UInt) return Bool;
+
   procedure Set_Integer (Mode: in Enum; Param: in Int);
+
   procedure Set_Pixels
     ( XOff: in Int; YOff: in Int; ZOff: in Int;
       Width: in UInt; Height: in UInt; Depth: in UInt;
       Format: in Enum; Type_Of: in Enum; Data: in Pointer
     );
+
   procedure Shut_Down;
+
   function Surface_To_DXTC_Data (Format: in Enum) return Bool;
+
   function Tex_Image
     ( Width: in UInt; Height: in UInt; Depth: in UInt;
       Num_Channels: in UByte; Format: in Enum; Type_Of: in Enum;
       Data: in Pointer
     ) return Bool;
+
   function Tex_Image_DXTC
     ( W: in Int; H: in Int; D: in Int; DXT_Format: in Enum; Data: in Pointer
     ) return Bool;
+
   function Type_From_Ext (File_Name: in String) return Enum;
+  Pragma Inline (Type_From_Ext);
+
   function Type_Func (Mode: in Enum) return Bool;
 
+-- Unbound subprograms:
 -- ILubyte* ilCompressDXT(ILubyte *Data, ILuint Width, ILuint Height, ILuint Depth, ILenum DXTCFormat, ILuint *DXTCSize);
 -- ILenum	ilDetermineTypeF(ILHANDLE File);
 -- ILubyte* ilGetAlpha(ILenum Type);
