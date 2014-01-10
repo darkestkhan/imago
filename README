@@ -1,3 +1,23 @@
-Ada binding to DevIL library.
+[Incomplete] Ada binding to DevIL library.
 
 Depends on gprbuild and devil library.
+
+Following subprograms (+ entire ilut.h) are still not bound:
+  ILubyte* ilCompressDXT(ILubyte *Data, ILuint Width, ILuint Height, ILuint Depth, ILenum DXTCFormat, ILuint *DXTCSize);
+  ILenum	ilDetermineTypeF(ILHANDLE File);
+  ILubyte* ilGetAlpha(ILenum Type);
+  ILubyte* ilGetData(void);
+  ILubyte* ilGetPalette(void);
+  ILboolean ilIsValidF(ILenum Type, ILHANDLE File);
+  ILboolean ilLoadF(ILenum Type, ILHANDLE File);
+  ILboolean ilRegisterLoad(ILconst_string Ext, IL_LOADPROC Load);
+  ILboolean ilRegisterSave(ILconst_string Ext, IL_SAVEPROC Save);
+  ILuint    ilSaveF(ILenum Type, ILHANDLE File);
+  void      ilSetMemory(mAlloc, mFree);
+  void      ilSetRead(fOpenRProc, fCloseRProc, fEofProc, fGetcProc, fReadProc, fSeekRProc, fTellRProc);
+  void      ilSetString(ILenum Mode, const char *String);
+  void      ilSetWrite(fOpenWProc, fCloseWProc, fPutcProc, fSeekWProc, fTellWProc, fWriteProc);
+  ILboolean ilLoadDataF(ILHANDLE File, ILuint Width, ILuint Height, ILuint Depth, ILubyte Bpp);
+  void      iluGetImageInfo(ILinfo *Info);
+  void      iluRegionfv(ILpointf *Points, ILuint n);
+  void      iluRegioniv(ILpointi *Points, ILuint n);
