@@ -1,6 +1,6 @@
 [Incomplete] Ada binding to DevIL library.
 
-Depends on gprbuild and devil library.
+Depends on gprbuild (may build with gnatmake but not tested) and devil library.
 
 Following subprograms (+ entire ilut.h) are still not bound:
   ILubyte* ilCompressDXT(ILubyte *Data, ILuint Width, ILuint Height, ILuint Depth, ILenum DXTCFormat, ILuint *DXTCSize);
