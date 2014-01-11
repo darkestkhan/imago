@@ -26,9 +26,10 @@ pragma License (Modified_GPL);
 -- however invalidate  any other reasons why  the executable file  might be --
 -- covered by the  GNU Public License.                                      --
 ------------------------------------------------------------------------------
+with Ada.Unchecked_Deallocation;
+
 with Interfaces.C;
 with Interfaces.C.Strings;
-
 package body Imago.ILUT is
 
   --------------------------------------------------------------------------
@@ -42,11 +43,22 @@ package body Imago.ILUT is
   package IC renames Interfaces.C;
   package CStrings renames Interfaces.C.Strings;
 
+  --------------------------------------------------------------------------
+
+                      ---------------------------------
+                      -- I N S T A N T I A T I O N S --
+                      ---------------------------------
+
+  --------------------------------------------------------------------------
+
+  procedure Free is new
+    Ada.Unchecked_Deallocation (IC.char_array, CStrings.char_array_access);
+
   ---------------------------------------------------------------------------
 
-              -------------------------------------------
-              -- S U B P R O G R A M ' S   B O D I E S --
-              -------------------------------------------
+                  -------------------------------------------
+                  -- S U B P R O G R A M ' S   B O D I E S --
+                  -------------------------------------------
 
   ---------------------------------------------------------------------------
 
@@ -97,6 +109,73 @@ package body Imago.ILUT is
   begin
     return IC.To_Ada (CStrings.Value (ilutGetString (String_Name)));
   end Get_String;
+
+  ---------------------------------------------------------------------------
+
+  function GL_Load_Image (File_Name: in String) return GL.UInt
+  is
+    function ilutGLLoadImage (F: in CStrings.chars_ptr) return GL.UInt;
+    Pragma Import (StdCall, ilutGLLoadImage, "ilutGLLoadImage");
+
+    Value: GL.UInt;
+
+    CString: CStrings.char_array_access :=
+      new IC.char_array'(IC.To_C (File_Name));
+  begin
+    Value := ilutGLLoadImage (CStrings.To_Chars_Ptr (CString));
+    Free (CString);
+    return Value;
+  end GL_Load_Image;
+
+  ---------------------------------------------------------------------------
+
+  function GL_Save_Image
+    ( File_Name: in String; Tex_ID: in GL.UInt
+    ) return IL.Bool
+  is
+    function ilutGLSaveImage
+      ( F: in CStrings.chars_ptr; Tex_ID: in GL.UInt
+      ) return IL.Bool;
+    Pragma Import (StdCall, ilutGLSaveImage, "ilutGLSaveImage");
+
+    Value: IL.Bool;
+
+    CString: CStrings.char_array_access :=
+      new IC.char_array'(IC.To_C (File_Name));
+  begin
+    Value := ilutGLSaveImage (CStrings.To_Chars_Ptr (CString), Tex_ID);
+    Free (CString);
+    return Value;
+  end GL_Save_Image;
+
+  ---------------------------------------------------------------------------
+
+  function GL_Sub_Tex
+    ( Tex_ID: in GL.UInt; XOff: in IL.UInt; YOff: in IL.UInt
+    ) return IL.Bool
+  is
+    function ilutGLSubTex2D
+      ( T: in GL.UInt; X: in IL.UInt; Y: in IL.UInt
+      ) return IL.Bool;
+    Pragma Import (StdCall, ilutGLSubTex2D, "ilutGLSubTex2D");
+  begin
+    return ilutGLSubTex2D (Tex_ID, XOff, YOff);
+  end GL_Sub_Tex;
+
+  ---------------------------------------------------------------------------
+
+  function GL_Sub_Tex
+    ( Tex_ID: in GL.UInt; XOff: in IL.UInt;
+      YOff: in IL.UInt; ZOff: in IL.UInt
+    ) return IL.Bool
+  is
+    function ilutGLSubTex3D
+      ( T: in GL.UInt; X: in IL.UInt; Y: in IL.UInt; Z: in IL.UInt
+      ) return IL.Bool;
+    Pragma Import (StdCall, ilutGLSubTex3D, "ilutGLSubTex3D");
+  begin
+    return ilutGLSubTex3D (Tex_ID, XOff, YOff, ZOff);
+  end GL_Sub_Tex;
 
   ---------------------------------------------------------------------------
 

@@ -29,6 +29,8 @@ pragma License (Modified_GPL);
 with Imago.IL;
 use Imago;
 
+with Lumen.GL;
+use Lumen;
 package Imago.ILUT is
 
   --------------------------------------------------------------------------
@@ -137,21 +139,42 @@ package Imago.ILUT is
   function Renderer (Renderer: in IL.Enum) return IL.Bool;
 
   -- ImageLib Utility Toolkit's OpenGL Functions.
---	GLuint	ilutGLBindTexImage();
---	GLuint	ilutGLBindMipmaps(void);
---	ILboolean	ilutGLBuildMipmaps(void);
---	GLuint	ilutGLLoadImage(ILstring FileName);
---	ILboolean	ilutGLScreen(void);
---	ILboolean	ilutGLScreenie(void);
---	ILboolean	ilutGLSaveImage(ILstring FileName, GLuint TexID);
---	ILboolean ilutGLSubTex2D(GLuint TexID, ILuint XOff, ILuint YOff);
---	ILboolean ilutGLSubTex3D(GLuint TexID, ILuint XOff, ILuint YOff, ILuint ZOff);
---	ILboolean	ilutGLSetTex2D(GLuint TexID);
---	ILboolean	ilutGLSetTex3D(GLuint TexID);
---	ILboolean	ilutGLTexImage(GLuint Level);
---	ILboolean ilutGLSubTex(GLuint TexID, ILuint XOff, ILuint YOff);
---	ILboolean	ilutGLSetTex(GLuint TexID);
---	ILboolean ilutGLSubTex(GLuint TexID, ILuint XOff, ILuint YOff);
+  function GL_Bind_Tex_Image return GL.UInt;
+
+  function GL_Bind_Mipmaps return GL.UInt;
+
+  function GL_Build_Mipmaps return IL.Bool;
+
+  function GL_Load_Image (File_Name: in String) return GL.UInt;
+  Pragma Inline (GL_Load_Image);
+
+  function GL_Screen return IL.Bool;
+
+  function GL_Screenie return IL.Bool;
+
+  function GL_Save_Image
+    ( File_Name: in String; Tex_ID: in GL.UInt
+    ) return IL.Bool;
+  Pragma Inline (GL_Save_Image);
+
+  function GL_Sub_Tex
+    ( Tex_ID: in GL.UInt; XOff: in IL.UInt; YOff: in IL.UInt
+    ) return IL.Bool;
+
+  function GL_Sub_Tex
+    ( Tex_ID: in GL.UInt; XOff: in IL.UInt;
+      YOff: in IL.UInt; ZOff: in IL.UInt
+    ) return IL.Bool;
+  Pragma Inline (GL_Sub_Tex);
+
+  function GL_Set_Tex_2D (Tex_ID: in GL.UInt) return IL.Bool;
+  Pragma Import (StdCall, GL_Set_Tex_2D, "ilutGLSetTex2D");
+
+  function GL_Set_Tex_3D (Tex_ID: in GL.UInt) return IL.Bool;
+  Pragma Import (StdCall, GL_Set_Tex_3D, "ilutGLSetTex3D");
+
+  function GL_Tex_Image (Level: in GL.UInt) return IL.Bool;
+  Pragma Import (StdCall, GL_Tex_Image, "ilutGLTexImage");
 
   ---------------------------------------------------------------------------
 
@@ -174,6 +197,13 @@ private
   Pragma Import (StdCall, Push_Attrib, "ilutPushAttrib");
   Pragma Import (StdCall, Set_Integer, "ilutSetInteger");
   Pragma Import (StdCall, Renderer, "ilutRenderer");
+
+  -- OpenGL dependent subprograms
+  Pragma Import (StdCall, GL_Bind_Tex_Image, "ilutGLBindTexImage");
+  Pragma Import (StdCall, GL_Bind_Mipmaps, "ilutGLBindMipmaps");
+  Pragma Import (StdCall, GL_Build_Mipmaps, "ilutGLBuildMipmaps");
+  Pragma Import (StdCall, GL_Screen, "ilutGLScreen");
+  Pragma Import (StdCall, GL_Screenie, "ilutGLScreenie");
 
   --------------------------------------------------------------------------
 
