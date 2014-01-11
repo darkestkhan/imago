@@ -2,9 +2,10 @@
 
 Depends on gprbuild (may build with gnatmake but not tested) and devil library.
 
-When linking against devil don't forget to add "-lIL" and "-lILU" flags.
+When linking against devil don't forget to add "-lIL", "-lILU" and "-lILUT"
+flags.
 
-Following subprograms (+ entire ilut.h) are still not bound:
+Following subprograms are still not bound:
   ILenum	ilDetermineTypeF(ILHANDLE File);
   ILboolean ilIsValidF(ILenum Type, ILHANDLE File);
   ILboolean ilLoadF(ILenum Type, ILHANDLE File);
@@ -19,3 +20,18 @@ Following subprograms (+ entire ilut.h) are still not bound:
   void      iluGetImageInfo(ILinfo *Info);
   void      iluRegionfv(ILpointf *Points, ILuint n);
   void      iluRegioniv(ILpointi *Points, ILuint n);
+	GLuint	ilutGLBindTexImage();
+	GLuint	ilutGLBindMipmaps(void);
+	ILboolean	ilutGLBuildMipmaps(void);
+	GLuint	ilutGLLoadImage(ILstring FileName);
+	ILboolean	ilutGLScreen(void);
+	ILboolean	ilutGLScreenie(void);
+	ILboolean	ilutGLSaveImage(ILstring FileName, GLuint TexID);
+	ILboolean ilutGLSubTex2D(GLuint TexID, ILuint XOff, ILuint YOff);
+	ILboolean ilutGLSubTex3D(GLuint TexID, ILuint XOff, ILuint YOff, ILuint ZOff);
+	ILboolean	ilutGLSetTex2D(GLuint TexID);
+	ILboolean	ilutGLSetTex3D(GLuint TexID);
+	ILboolean	ilutGLTexImage(GLuint Level);
+	ILboolean ilutGLSubTex(GLuint TexID, ILuint XOff, ILuint YOff);
+	ILboolean	ilutGLSetTex(GLuint TexID);
+	ILboolean ilutGLSubTex(GLuint TexID, ILuint XOff, ILuint YOff);
