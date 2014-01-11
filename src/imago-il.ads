@@ -415,6 +415,11 @@ package Imago.IL is
 
   function Clone_Cur_Image return UInt;
 
+  function Compress_DXT
+    ( Data: in Pointer; Width: in UInt; Height: in UInt;
+      Depth: in UInt; DXTC_Format: in Enum; DXTC_Size: in Pointer
+    ) return Pointer;
+
   function Compress_Func (Mode: in Enum) return Bool;
 
   function Convert_Image (Dest_Format: in Enum; Dest_Type: in Enum) return Bool;
@@ -454,6 +459,8 @@ package Imago.IL is
 
   function Format_Func (Mode: in Enum) return Bool;
 
+  function Get_Alpha (Type_Of: in Enum) return Pointer;
+
   function Gen_Image return UInt;
 
   procedure Gen_Images (Num: in SizeI; Images: in Pointer);
@@ -477,6 +484,8 @@ package Imago.IL is
   Pragma Inline (Get_Integer);
 
   function Get_Lump_Pos return UInt;
+
+  function Get_Palette return Pointer;
 
   function Get_String (String_Name: in Enum) return String;
   Pragma Inline (Get_String);
@@ -624,10 +633,7 @@ package Imago.IL is
   function Type_Func (Mode: in Enum) return Bool;
 
 -- Unbound subprograms:
--- ILubyte* ilCompressDXT(ILubyte *Data, ILuint Width, ILuint Height, ILuint Depth, ILenum DXTCFormat, ILuint *DXTCSize);
 -- ILenum	ilDetermineTypeF(ILHANDLE File);
--- ILubyte* ilGetAlpha(ILenum Type);
--- ILubyte* ilGetPalette(void);
 -- ILboolean ilIsValidF(ILenum Type, ILHANDLE File);
 -- ILboolean ilLoadF(ILenum Type, ILHANDLE File);
 -- ILboolean ilRegisterLoad(ILconst_string Ext, IL_LOADPROC Load);
@@ -662,6 +668,7 @@ private
   Pragma Import (StdCall, Clear_Colour, "ilClearColour");
   Pragma Import (StdCall, Clear_Image, "ilClearImage");
   Pragma Import (StdCall, Clone_Cur_Image, "ilCloneCurImage");
+  Pragma Import (StdCall, Compress_DXT, "ilCompressDXT");
   Pragma Import (StdCall, Compress_Func, "ilCompressFunc");
   Pragma Import (StdCall, Convert_Image, "ilConvertImage");
   Pragma Import (StdCall, Convert_Pal, "ilConvertPal");
@@ -677,12 +684,14 @@ private
   Pragma Import (StdCall, Enable, "ilEnable");
   Pragma Import (StdCall, Flip_Surface_DXTC_Data, "ilFlipSurfaceDxtcData");
   Pragma Import (StdCall, Format_Func, "ilFormatFunc");
+  Pragma Import (StdCall, Get_Alpha, "ilGetAlpha");
   Pragma Import (StdCall, Gen_Image, "ilGenImage");
   Pragma Import (StdCall, Gen_Images, "ilGenImages");
   Pragma Import (StdCall, Get_Data, "ilGetData");
   Pragma Import (StdCall, Get_DXTC_Data, "ilGetDXTCData");
   Pragma Import (StdCall, Get_Error, "ilGetError");
   Pragma Import (StdCall, Get_Lump_Pos, "ilGetLumpPos");
+  Pragma Import (StdCall, Get_Palette, "ilGetPalette");
   Pragma Import (StdCall, Hint, "ilHint");
   Pragma Import
     ( StdCall, Invert_Surface_DXTC_Data_Alpha, "ilInvertSurfaceDxtcDataAlpha" );
