@@ -96,7 +96,7 @@ package Imago.Binary is
   --------------------------------------------------------------------------
   -- Array types.
   type Byte_Array     is array (Natural range <>) of Byte;
-  type Short_Array    is array (Natural range <>) of Byte;
+  type Short_Array    is array (Natural range <>) of Short;
   type Word_Array     is array (Natural range <>) of Word;
   type Long_Array     is array (Natural range <>) of Long;
 
