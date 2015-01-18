@@ -2,7 +2,7 @@ with "lumen.gpr";
 
 project Imago is
 
-  Version := "0.1";
+  Version := "0.2";
   Name    := "imago";
 
   for Languages use ("Ada");

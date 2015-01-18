@@ -27,7 +27,7 @@ Following subprograms are still not bound:
   void      iluRegioniv(ILpointi *Points, ILuint n);
 
 ------------------------------------------------------------------------------
---                    Copyright © 2014 darkestkhan                          --
+--                    Copyright © 2015 darkestkhan                          --
 ------------------------------------------------------------------------------
 --  This Program is Free Software: You can redistribute it and/or modify    --
 --  it under the terms of The GNU General Public License as published by    --

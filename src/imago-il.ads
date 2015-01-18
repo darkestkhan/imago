@@ -4,7 +4,7 @@ pragma License (Modified_GPL);
 -- License: Modified GNU GPLv3 or any later as published by Free Software   --
 --  Foundation (GMGPL).                                                     --
 --                                                                          --
---                    Copyright © 2014 darkestkhan                          --
+--                    Copyright © 2015 darkestkhan                          --
 ------------------------------------------------------------------------------
 --  This Program is Free Software: You can redistribute it and/or modify    --
 --  it under the terms of The GNU General Public License as published by    --
@@ -502,7 +502,7 @@ package Imago.IL is
 
   function Is_Enabled (Mode: in Enum) return Bool;
 
-  function Is_Imaga (Image: in UInt) return Bool;
+  function Is_Image (Image: in UInt) return Bool;
 
   function Is_Valid (Type_Of: in Enum; File_Name: in String) return Bool;
 
@@ -708,7 +708,7 @@ private
   pragma Import (StdCall, Image_To_DXTC_Data, "ilImageToDxtcData");
   pragma Import (StdCall, Is_Disabled, "ilIsDisabled");
   pragma Import (StdCall, Is_Enabled, "ilIsEnabled");
-  pragma Import (StdCall, Is_Imaga, "ilIsImage");
+  pragma Import (StdCall, Is_Image, "ilIsImage");
   pragma Import (StdCall, Key_Color, "ilKeyColour");
   pragma Import (StdCall, Key_Colour, "ilKeyColour");
   pragma Import (StdCall, Mod_Alpha, "ilModAlpha");

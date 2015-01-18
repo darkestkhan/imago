@@ -1,0 +1,5 @@
+2015-01-18  darkestkhan  <darkestkhan@gmail.com>
+
+	Added style warnings, fixed style warnings and bumped so version.
+	* src/imago-il.ads (Is_Image): Fix typo in function name.
+	(from Is_Imaga to Is_Image).
