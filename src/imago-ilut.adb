@@ -65,7 +65,7 @@ package body Imago.ILUT is
   function Get_Boolean (Mode: in IL.Enum) return IL.Bool
   is
     function ilutGetBoolean (Mode: in IL.Enum) return IL.Bool;
-    Pragma Import (StdCall, ilutGetBoolean, "ilutGetBoolean");
+    pragma Import (StdCall, ilutGetBoolean, "ilutGetBoolean");
   begin
     return ilutGetBoolean (Mode);
   end Get_Boolean;
@@ -75,7 +75,7 @@ package body Imago.ILUT is
   procedure Get_Boolean (Mode: in IL.Enum; Param: in IL.Pointer)
   is
     procedure ilutGetBooleanV (Mode: in IL.Enum; Param: in IL.Pointer);
-    Pragma Import (StdCall, ilutGetBooleanV, "ilutGetBooleanv");
+    pragma Import (StdCall, ilutGetBooleanV, "ilutGetBooleanv");
   begin
     ilutGetBooleanV (Mode, Param);
   end Get_Boolean;
@@ -85,7 +85,7 @@ package body Imago.ILUT is
   function Get_Integer (Mode: in IL.Enum) return IL.Int
   is
     function ilutGetInteger (Mode: in IL.Enum) return IL.Int;
-    Pragma Import (StdCall, ilutGetInteger, "ilutGetInteger");
+    pragma Import (StdCall, ilutGetInteger, "ilutGetInteger");
   begin
     return ilutGetInteger (Mode);
   end Get_Integer;
@@ -95,7 +95,7 @@ package body Imago.ILUT is
   procedure Get_Integer (Mode: in IL.Enum; Param: in IL.Pointer)
   is
     procedure ilutGetIntegerV (Mode: in IL.Enum; Param: in IL.Pointer);
-    Pragma Import (StdCall, ilutGetIntegerV, "ilutGetIntegerv");
+    pragma Import (StdCall, ilutGetIntegerV, "ilutGetIntegerv");
   begin
     ilutGetIntegerV (Mode, Param);
   end Get_Integer;
@@ -105,7 +105,7 @@ package body Imago.ILUT is
   function Get_String (String_Name: in IL.Enum) return String
   is
     function ilutGetString (String_Name: in IL.Enum) return CStrings.chars_ptr;
-    Pragma Import (StdCall, ilutGetString, "ilutGetString");
+    pragma Import (StdCall, ilutGetString, "ilutGetString");
   begin
     return IC.To_Ada (CStrings.Value (ilutGetString (String_Name)));
   end Get_String;
@@ -115,7 +115,7 @@ package body Imago.ILUT is
   function GL_Load_Image (File_Name: in String) return GL.UInt
   is
     function ilutGLLoadImage (F: in CStrings.chars_ptr) return GL.UInt;
-    Pragma Import (StdCall, ilutGLLoadImage, "ilutGLLoadImage");
+    pragma Import (StdCall, ilutGLLoadImage, "ilutGLLoadImage");
 
     Value: GL.UInt;
 
@@ -136,7 +136,7 @@ package body Imago.ILUT is
     function ilutGLSaveImage
       ( F: in CStrings.chars_ptr; Tex_ID: in GL.UInt
       ) return IL.Bool;
-    Pragma Import (StdCall, ilutGLSaveImage, "ilutGLSaveImage");
+    pragma Import (StdCall, ilutGLSaveImage, "ilutGLSaveImage");
 
     Value: IL.Bool;
 
@@ -157,7 +157,7 @@ package body Imago.ILUT is
     function ilutGLSubTex2D
       ( T: in GL.UInt; X: in IL.UInt; Y: in IL.UInt
       ) return IL.Bool;
-    Pragma Import (StdCall, ilutGLSubTex2D, "ilutGLSubTex2D");
+    pragma Import (StdCall, ilutGLSubTex2D, "ilutGLSubTex2D");
   begin
     return ilutGLSubTex2D (Tex_ID, XOff, YOff);
   end GL_Sub_Tex;
@@ -172,7 +172,7 @@ package body Imago.ILUT is
     function ilutGLSubTex3D
       ( T: in GL.UInt; X: in IL.UInt; Y: in IL.UInt; Z: in IL.UInt
       ) return IL.Bool;
-    Pragma Import (StdCall, ilutGLSubTex3D, "ilutGLSubTex3D");
+    pragma Import (StdCall, ilutGLSubTex3D, "ilutGLSubTex3D");
   begin
     return ilutGLSubTex3D (Tex_ID, XOff, YOff, ZOff);
   end GL_Sub_Tex;

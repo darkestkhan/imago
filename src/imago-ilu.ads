@@ -18,13 +18,13 @@ pragma License (Modified_GPL);
 --                                                                          --
 --    You should have received a copy of the GNU General Public License     --
 --   along with this program.  If not, see <http://www.gnu.org/licenses/>.  --
---                                                                          --   
--- As a special exception,  if other files  instantiate  generics from this --   
--- unit, or you link  this unit with other files  to produce an executable, --   
--- this  unit  does not  by itself cause  the resulting  executable  to  be --   
--- covered  by the  GNU  General  Public  License.  This exception does not --   
--- however invalidate  any other reasons why  the executable file  might be --   
--- covered by the  GNU Public License.                                      --   
+--                                                                          --
+-- As a special exception,  if other files  instantiate  generics from this --
+-- unit, or you link  this unit with other files  to produce an executable, --
+-- this  unit  does not  by itself cause  the resulting  executable  to  be --
+-- covered  by the  GNU  General  Public  License.  This exception does not --
+-- however invalidate  any other reasons why  the executable file  might be --
+-- covered by the  GNU Public License.                                      --
 ------------------------------------------------------------------------------
 with Imago.IL;
 use Imago;
@@ -79,7 +79,7 @@ package Imago.ILU is
   ILU_UPPER_RIGHT                       : constant IL.Enum := 16#0704#;
   ILU_CENTER                            : constant IL.Enum := 16#0705#;
   ILU_CONVOLUTION_MATRIX                : constant IL.Enum := 16#0710#;
-  
+
   ILU_VERSION_NUM                       : constant IL.Enum := IL.IL_VERSION_NUM;
   ILU_VENDOR                            : constant IL.Enum := IL.IL_VENDOR;
 
@@ -140,7 +140,7 @@ package Imago.ILU is
     ) return IL.Bool;
 
   function Error_String (String_Name: in IL.Enum) return String;
-  Pragma Inline (Error_String);
+  pragma Inline (Error_String);
 
   function Equalize return IL.Bool;
 
@@ -157,10 +157,10 @@ package Imago.ILU is
   function  Get_Integer (Mode: in IL.Enum) return IL.Int;
 
   procedure Get_Integer (Mode: in IL.Enum; Param: in IL.Pointer);
-  Pragma Inline (Get_Integer);
+  pragma Inline (Get_Integer);
 
   function Get_String (String_Name: in IL.Enum) return String;
-  Pragma Inline (Get_String);
+  pragma Inline (Get_String);
 
   procedure Image_Parameter (P_Name: in IL.Enum; Param: in IL.Enum);
 
@@ -169,7 +169,7 @@ package Imago.ILU is
   function Invert_Alpha return IL.Bool;
 
   function Load_Image (File_Name: in String) return IL.UInt;
-  Pragma Inline (Load_Image);
+  pragma Inline (Load_Image);
 
   function Mirror return IL.Bool;
 
@@ -194,14 +194,14 @@ package Imago.ILU is
   function Rotate
     ( X: in Float; Y: in Float; Z: in Float; Angle: in Float
     ) return IL.Bool;
-  Pragma Inline (Rotate);
+  pragma Inline (Rotate);
 
   function Saturate (Saturation: in Float) return IL.Bool;
 
   function Saturate
     ( R: in Float; G: in Float; B: in Float; Saturation: in Float
     ) return IL.Bool;
-  Pragma Inline (Saturate);
+  pragma Inline (Saturate);
 
   function Scale
     ( Width: in IL.UInt; Height: in IL.UInt; Depth: in IL.UInt
@@ -240,45 +240,45 @@ private
 
   --------------------------------------------------------------------------
 
-  Pragma Import (StdCall, Alienify, "iluAlienify");
-  Pragma Import (StdCall, Blur_Avg, "iluBlurAvg");
-  Pragma Import (StdCall, Blur_Gaussian, "iluBlurGaussian");
-  Pragma Import (StdCall, Build_Mipmaps, "iluBuildMipmaps");
-  Pragma Import (StdCall, Colors_Used, "iluColoursUsed");
-  Pragma Import (StdCall, Colours_Used, "iluColoursUsed");
-  Pragma Import (StdCall, Compare_Image, "iluCompareImage");
-  Pragma Import (StdCall, Contrast, "iluContrast");
-  Pragma Import (StdCall, Crop, "iluCrop");
-  Pragma Import (StdCall, Delete_Image, "iluDeleteImage");
-  Pragma Import (StdCall, Edge_Detect_E, "iluEdgeDetectE");
-  Pragma Import (StdCall, Edge_Detect_P, "iluEdgeDetectP");
-  Pragma Import (StdCall, Edge_Detect_S, "iluEdgeDetectS");
-  Pragma Import (StdCall, Emboss, "iluEmboss");
-  Pragma Import (StdCall, Enlarge_Canvas, "iluEnlargeCanvas");
-  Pragma Import (StdCall, Enlarge_Image, "iluEnlargeImage");
-  Pragma Import (StdCall, Equalize, "iluEqualize");
-  Pragma Import (StdCall, Convolution, "iluConvolution");
-  Pragma Import (StdCall, Flip_Image, "iluFlipImage");
-  Pragma Import (StdCall, Gamma_Correct, "iluGammaCorrect");
-  Pragma Import (StdCall, Gen_Image, "iluGenImage");
-  Pragma Import (StdCall, Image_Parameter, "iluImageParameter");
-  Pragma Import (StdCall, Init, "iluInit");
-  Pragma Import (StdCall, Invert_Alpha, "iluInvertAlpha");
-  Pragma Import (StdCall, Mirror, "iluMirror");
-  Pragma Import (StdCall, Negative, "iluNegative");
-  Pragma Import (StdCall, Noisify, "iluNoisify");
-  Pragma Import (StdCall, Pixelize, "iluPixelize");
-  Pragma Import (StdCall, Replace_Color, "iluReplaceColour");
-  Pragma Import (StdCall, Replace_Colour, "iluReplaceColour");
-  Pragma Import (StdCall, Scale, "iluScale");
-  Pragma Import (StdCall, Scale_Alpha, "iluScaleAlpha");
-  Pragma Import (StdCall, Scale_Colors, "iluScaleColours");
-  Pragma Import (StdCall, Scale_Colours, "iluScaleColours");
-  Pragma Import (StdCall, Set_Language, "iluSetLanguage");
-  Pragma Import (StdCall, Sharpen, "iluSharpen");
-  Pragma Import (StdCall, Swap_Colors, "iluSwapColours");
-  Pragma Import (StdCall, Swap_Colours, "iluSwapColours");
-  Pragma Import (StdCall, Wave, "iluWave");
+  pragma Import (StdCall, Alienify, "iluAlienify");
+  pragma Import (StdCall, Blur_Avg, "iluBlurAvg");
+  pragma Import (StdCall, Blur_Gaussian, "iluBlurGaussian");
+  pragma Import (StdCall, Build_Mipmaps, "iluBuildMipmaps");
+  pragma Import (StdCall, Colors_Used, "iluColoursUsed");
+  pragma Import (StdCall, Colours_Used, "iluColoursUsed");
+  pragma Import (StdCall, Compare_Image, "iluCompareImage");
+  pragma Import (StdCall, Contrast, "iluContrast");
+  pragma Import (StdCall, Crop, "iluCrop");
+  pragma Import (StdCall, Delete_Image, "iluDeleteImage");
+  pragma Import (StdCall, Edge_Detect_E, "iluEdgeDetectE");
+  pragma Import (StdCall, Edge_Detect_P, "iluEdgeDetectP");
+  pragma Import (StdCall, Edge_Detect_S, "iluEdgeDetectS");
+  pragma Import (StdCall, Emboss, "iluEmboss");
+  pragma Import (StdCall, Enlarge_Canvas, "iluEnlargeCanvas");
+  pragma Import (StdCall, Enlarge_Image, "iluEnlargeImage");
+  pragma Import (StdCall, Equalize, "iluEqualize");
+  pragma Import (StdCall, Convolution, "iluConvolution");
+  pragma Import (StdCall, Flip_Image, "iluFlipImage");
+  pragma Import (StdCall, Gamma_Correct, "iluGammaCorrect");
+  pragma Import (StdCall, Gen_Image, "iluGenImage");
+  pragma Import (StdCall, Image_Parameter, "iluImageParameter");
+  pragma Import (StdCall, Init, "iluInit");
+  pragma Import (StdCall, Invert_Alpha, "iluInvertAlpha");
+  pragma Import (StdCall, Mirror, "iluMirror");
+  pragma Import (StdCall, Negative, "iluNegative");
+  pragma Import (StdCall, Noisify, "iluNoisify");
+  pragma Import (StdCall, Pixelize, "iluPixelize");
+  pragma Import (StdCall, Replace_Color, "iluReplaceColour");
+  pragma Import (StdCall, Replace_Colour, "iluReplaceColour");
+  pragma Import (StdCall, Scale, "iluScale");
+  pragma Import (StdCall, Scale_Alpha, "iluScaleAlpha");
+  pragma Import (StdCall, Scale_Colors, "iluScaleColours");
+  pragma Import (StdCall, Scale_Colours, "iluScaleColours");
+  pragma Import (StdCall, Set_Language, "iluSetLanguage");
+  pragma Import (StdCall, Sharpen, "iluSharpen");
+  pragma Import (StdCall, Swap_Colors, "iluSwapColours");
+  pragma Import (StdCall, Swap_Colours, "iluSwapColours");
+  pragma Import (StdCall, Wave, "iluWave");
 
   --------------------------------------------------------------------------
 

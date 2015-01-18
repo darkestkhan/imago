@@ -66,7 +66,7 @@ package body Imago.ILU is
   function Error_String (String_Name: in IL.Enum) return String
   is
     function iluErrorString (String_Name: in IL.Enum) return CStrings.chars_ptr;
-    Pragma Import (StdCall, iluErrorString, "iluErrorString");
+    pragma Import (StdCall, iluErrorString, "iluErrorString");
   begin
     return IC.To_Ada (CStrings.Value (iluErrorString (String_Name)));
   end Error_String;
@@ -76,7 +76,7 @@ package body Imago.ILU is
   function Get_Integer (Mode: in IL.Enum) return IL.Int
   is
     function iluGetInteger (Mode: in IL.Enum) return IL.Int;
-    Pragma Import (StdCall, iluGetInteger, "iluGetInteger");
+    pragma Import (StdCall, iluGetInteger, "iluGetInteger");
   begin
     return iluGetInteger (Mode);
   end Get_Integer;
@@ -86,7 +86,7 @@ package body Imago.ILU is
   procedure Get_Integer (Mode: in IL.Enum; Param: in IL.Pointer)
   is
     procedure iluGetIntegerV (Mode: in IL.Enum; Param: in IL.Pointer);
-    Pragma Import (StdCall, iluGetIntegerV, "iluGetIntegerv");
+    pragma Import (StdCall, iluGetIntegerV, "iluGetIntegerv");
   begin
     iluGetIntegerV (Mode, Param);
   end Get_Integer;
@@ -96,7 +96,7 @@ package body Imago.ILU is
   function Get_String (String_Name: in IL.Enum) return String
   is
     function iluGetString (String_Name: in IL.Enum) return CStrings.chars_ptr;
-    Pragma Import (StdCall, iluGetString, "iluGetString");
+    pragma Import (StdCall, iluGetString, "iluGetString");
   begin
     return IC.To_Ada (CStrings.Value (iluGetString (String_Name)));
   end Get_String;
@@ -106,7 +106,7 @@ package body Imago.ILU is
   function Load_Image (File_Name: in String) return IL.UInt
   is
     function iluLoadImage (F: in CStrings.chars_ptr) return IL.UInt;
-    Pragma Import (StdCall, iluLoadImage, "iluLoadImage");
+    pragma Import (StdCall, iluLoadImage, "iluLoadImage");
 
     Value: IL.UInt;
 
@@ -123,7 +123,7 @@ package body Imago.ILU is
   function Rotate (Angle: in Float) return IL.Bool
   is
     function iluRotate (Angle: in Float) return IL.Bool;
-    Pragma Import (StdCall, iluRotate, "iluRotate");
+    pragma Import (StdCall, iluRotate, "iluRotate");
   begin
     return iluRotate (Angle);
   end Rotate;
@@ -137,7 +137,7 @@ package body Imago.ILU is
     function iluRotate3D
       ( X: in Float; Y: in Float; Z: in Float; A: in Float
       ) return IL.Bool;
-    Pragma Import (StdCall, iluRotate3D, "iluRotate3D");
+    pragma Import (StdCall, iluRotate3D, "iluRotate3D");
   begin
     return iluRotate3D (X, Y, Z, Angle);
   end Rotate;
@@ -147,7 +147,7 @@ package body Imago.ILU is
   function Saturate (Saturation: in Float) return IL.Bool
   is
     function iluSaturate1f (Saturation: in Float) return IL.Bool;
-    Pragma Import (StdCall, iluSaturate1f, "iluSaturate1f");
+    pragma Import (StdCall, iluSaturate1f, "iluSaturate1f");
   begin
     return iluSaturate1f (Saturation);
   end Saturate;
@@ -161,7 +161,7 @@ package body Imago.ILU is
     function iluSaturate4f
       ( R: in Float; G: in Float; B: in Float; S: in Float
       ) return IL.Bool;
-    Pragma Import (StdCall, iluSaturate4f, "iluSaturate4f");
+    pragma Import (StdCall, iluSaturate4f, "iluSaturate4f");
   begin
     return iluSaturate4f (R, G, B, Saturation);
   end Saturate;

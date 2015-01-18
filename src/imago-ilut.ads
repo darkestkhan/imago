@@ -18,13 +18,13 @@ pragma License (Modified_GPL);
 --                                                                          --
 --    You should have received a copy of the GNU General Public License     --
 --   along with this program.  If not, see <http://www.gnu.org/licenses/>.  --
---                                                                          --   
--- As a special exception,  if other files  instantiate  generics from this --   
--- unit, or you link  this unit with other files  to produce an executable, --   
--- this  unit  does not  by itself cause  the resulting  executable  to  be --   
--- covered  by the  GNU  General  Public  License.  This exception does not --   
--- however invalidate  any other reasons why  the executable file  might be --   
--- covered by the  GNU Public License.                                      --   
+--                                                                          --
+-- As a special exception,  if other files  instantiate  generics from this --
+-- unit, or you link  this unit with other files  to produce an executable, --
+-- this  unit  does not  by itself cause  the resulting  executable  to  be --
+-- covered  by the  GNU  General  Public  License.  This exception does not --
+-- however invalidate  any other reasons why  the executable file  might be --
+-- covered by the  GNU Public License.                                      --
 ------------------------------------------------------------------------------
 with Imago.IL;
 use Imago;
@@ -114,15 +114,15 @@ package Imago.ILUT is
   function Get_Boolean (Mode: in IL.Enum) return IL.Bool;
 
   procedure Get_Boolean (Mode: in IL.Enum; Param: in IL.Pointer);
-  Pragma Inline (Get_Boolean);
+  pragma Inline (Get_Boolean);
 
   function Get_Integer (Mode: in IL.Enum) return IL.Int;
 
   procedure Get_Integer (Mode: in IL.Enum; Param: in IL.Pointer);
-  Pragma Inline (Get_Integer);
+  pragma Inline (Get_Integer);
 
   function Get_String (String_Name: in IL.Enum) return String;
-  Pragma Inline (Get_String);
+  pragma Inline (Get_String);
 
   procedure Init;
 
@@ -146,7 +146,7 @@ package Imago.ILUT is
   function GL_Build_Mipmaps return IL.Bool;
 
   function GL_Load_Image (File_Name: in String) return GL.UInt;
-  Pragma Inline (GL_Load_Image);
+  pragma Inline (GL_Load_Image);
 
   function GL_Screen return IL.Bool;
 
@@ -155,7 +155,7 @@ package Imago.ILUT is
   function GL_Save_Image
     ( File_Name: in String; Tex_ID: in GL.UInt
     ) return IL.Bool;
-  Pragma Inline (GL_Save_Image);
+  pragma Inline (GL_Save_Image);
 
   function GL_Sub_Tex
     ( Tex_ID: in GL.UInt; XOff: in IL.UInt; YOff: in IL.UInt
@@ -165,16 +165,16 @@ package Imago.ILUT is
     ( Tex_ID: in GL.UInt; XOff: in IL.UInt;
       YOff: in IL.UInt; ZOff: in IL.UInt
     ) return IL.Bool;
-  Pragma Inline (GL_Sub_Tex);
+  pragma Inline (GL_Sub_Tex);
 
   function GL_Set_Tex_2D (Tex_ID: in GL.UInt) return IL.Bool;
-  Pragma Import (StdCall, GL_Set_Tex_2D, "ilutGLSetTex2D");
+  pragma Import (StdCall, GL_Set_Tex_2D, "ilutGLSetTex2D");
 
   function GL_Set_Tex_3D (Tex_ID: in GL.UInt) return IL.Bool;
-  Pragma Import (StdCall, GL_Set_Tex_3D, "ilutGLSetTex3D");
+  pragma Import (StdCall, GL_Set_Tex_3D, "ilutGLSetTex3D");
 
   function GL_Tex_Image (Level: in GL.UInt) return IL.Bool;
-  Pragma Import (StdCall, GL_Tex_Image, "ilutGLTexImage");
+  pragma Import (StdCall, GL_Tex_Image, "ilutGLTexImage");
 
   ---------------------------------------------------------------------------
 
@@ -188,22 +188,22 @@ private
 
   --------------------------------------------------------------------------
 
-  Pragma Import (StdCall, Disable, "ilutDisable");
-  Pragma Import (StdCall, Enable, "ilutEnable");
-  Pragma Import (StdCall, Init, "ilutInit");
-  Pragma Import (StdCall, Is_Disabled, "ilutIsDisabled");
-  Pragma Import (StdCall, Is_Enabled, "ilutIsEnabled");
-  Pragma Import (StdCall, Pop_Attrib, "ilutPopAttrib");
-  Pragma Import (StdCall, Push_Attrib, "ilutPushAttrib");
-  Pragma Import (StdCall, Set_Integer, "ilutSetInteger");
-  Pragma Import (StdCall, Renderer, "ilutRenderer");
+  pragma Import (StdCall, Disable, "ilutDisable");
+  pragma Import (StdCall, Enable, "ilutEnable");
+  pragma Import (StdCall, Init, "ilutInit");
+  pragma Import (StdCall, Is_Disabled, "ilutIsDisabled");
+  pragma Import (StdCall, Is_Enabled, "ilutIsEnabled");
+  pragma Import (StdCall, Pop_Attrib, "ilutPopAttrib");
+  pragma Import (StdCall, Push_Attrib, "ilutPushAttrib");
+  pragma Import (StdCall, Set_Integer, "ilutSetInteger");
+  pragma Import (StdCall, Renderer, "ilutRenderer");
 
   -- OpenGL dependent subprograms
-  Pragma Import (StdCall, GL_Bind_Tex_Image, "ilutGLBindTexImage");
-  Pragma Import (StdCall, GL_Bind_Mipmaps, "ilutGLBindMipmaps");
-  Pragma Import (StdCall, GL_Build_Mipmaps, "ilutGLBuildMipmaps");
-  Pragma Import (StdCall, GL_Screen, "ilutGLScreen");
-  Pragma Import (StdCall, GL_Screenie, "ilutGLScreenie");
+  pragma Import (StdCall, GL_Bind_Tex_Image, "ilutGLBindTexImage");
+  pragma Import (StdCall, GL_Bind_Mipmaps, "ilutGLBindMipmaps");
+  pragma Import (StdCall, GL_Build_Mipmaps, "ilutGLBuildMipmaps");
+  pragma Import (StdCall, GL_Screen, "ilutGLScreen");
+  pragma Import (StdCall, GL_Screenie, "ilutGLScreenie");
 
   --------------------------------------------------------------------------
 

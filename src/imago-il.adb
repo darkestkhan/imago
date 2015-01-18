@@ -66,7 +66,7 @@ package body Imago.IL is
   function Apply_Pal (File_Name: in String) return Bool
   is
     function ilApplyPal (FileName: in CStrings.chars_ptr) return Bool;
-    Pragma Import (StdCall, ilApplyPal, "ilApplyPal");
+    pragma Import (StdCall, ilApplyPal, "ilApplyPal");
 
     Success: Bool;
 
@@ -87,7 +87,7 @@ package body Imago.IL is
     function ilApplyProfile
       ( InProfile: in CStrings.chars_ptr; OutProfile: in CStrings.chars_ptr
       ) return Bool;
-    Pragma Import (StdCall, ilApplyProfile, "ilApplyProfile");
+    pragma Import (StdCall, ilApplyProfile, "ilApplyProfile");
 
     Success: Bool;
 
@@ -110,7 +110,7 @@ package body Imago.IL is
   function Determine_Type (File_Name: in String) return Enum
   is
     function ilDetermineType (FileName: in CStrings.chars_ptr) return Enum;
-    Pragma Import (StdCall, ilDetermineType, "ilDetermineType");
+    pragma Import (StdCall, ilDetermineType, "ilDetermineType");
 
     Value: Enum;
 
@@ -127,7 +127,7 @@ package body Imago.IL is
   function Determine_Type (Lump: in Pointer; Size: in UInt) return Enum
   is
     function ilDetermineTypeL (Lump: in Pointer; Size: in UInt) return Enum;
-    Pragma Import (StdCall, ilDetermineTypeL, "ilDetermineTypeL");
+    pragma Import (StdCall, ilDetermineTypeL, "ilDetermineTypeL");
   begin
     return ilDetermineTypeL (Lump, Size);
   end Determine_Type;
@@ -137,7 +137,7 @@ package body Imago.IL is
   function Get_Boolean (Mode: in Enum) return Bool
   is
     function ilGetBoolean (Mode: in Enum) return Bool;
-    Pragma Import (StdCall, ilGetBoolean, "ilGetBoolean");
+    pragma Import (StdCall, ilGetBoolean, "ilGetBoolean");
   begin
     return ilGetBoolean (Mode);
   end Get_Boolean;
@@ -147,7 +147,7 @@ package body Imago.IL is
   procedure Get_Boolean (Mode: in Enum; Param: in Pointer)
   is
     procedure ilGetBooleanV (Mode: in Enum; Param: in Pointer);
-    Pragma Import (StdCall, ilGetBooleanV, "ilGetBooleanv");
+    pragma Import (StdCall, ilGetBooleanV, "ilGetBooleanv");
   begin
     ilGetBooleanV (Mode, Param);
   end Get_Boolean;
@@ -157,7 +157,7 @@ package body Imago.IL is
   function Get_Integer (Mode: in Enum) return Int
   is
     function ilGetInteger (Mode: in Enum) return Int;
-    Pragma Import (StdCall, ilGetInteger, "ilGetInteger");
+    pragma Import (StdCall, ilGetInteger, "ilGetInteger");
   begin
     return ilGetInteger (Mode);
   end Get_Integer;
@@ -167,7 +167,7 @@ package body Imago.IL is
   procedure Get_Integer (Mode: in Enum; Param: in Pointer)
   is
     procedure ilGetIntegerV (Mode: in Enum; Param: in Pointer);
-    Pragma Import (StdCall, ilGetIntegerV, "ilGetIntegerv");
+    pragma Import (StdCall, ilGetIntegerV, "ilGetIntegerv");
   begin
     ilGetIntegerV (Mode, Param);
   end Get_Integer;
@@ -177,7 +177,7 @@ package body Imago.IL is
   function Get_String (String_Name: in Enum) return String
   is
     function ilGetString (String_Name: in Enum) return CStrings.chars_ptr;
-    Pragma Import (StdCall, ilGetString, "ilGetString");
+    pragma Import (StdCall, ilGetString, "ilGetString");
   begin
     return IC.To_Ada (CStrings.Value (ilGetString (String_Name)));
   end Get_String;
@@ -187,7 +187,7 @@ package body Imago.IL is
   function Is_Valid (Type_Of: in Enum; File_Name: in String) return Bool
   is
     function ilIsValid (T: in Enum; F: in CStrings.chars_ptr) return Bool;
-    Pragma Import (StdCall, ilIsValid, "ilIsValid");
+    pragma Import (StdCall, ilIsValid, "ilIsValid");
 
     Success: Bool;
 
@@ -206,7 +206,7 @@ package body Imago.IL is
     ) return Bool
   is
     function ilIsValidL (T: in Enum; L: in Pointer; S: in UInt) return Bool;
-    Pragma Import (StdCall, ilIsValidL, "ilIsValidL");
+    pragma Import (StdCall, ilIsValidL, "ilIsValidL");
   begin
     return ilIsValidL (Type_Of, Lump, Size);
   end Is_Valid;
@@ -216,7 +216,7 @@ package body Imago.IL is
   function Load (Type_Of: in Enum; File_Name: in String) return Bool
   is
     function ilLoad (T: in Enum; F: in CStrings.chars_ptr) return Bool;
-    Pragma Import (StdCall, ilLoad, "ilLoad");
+    pragma Import (StdCall, ilLoad, "ilLoad");
 
     Success: Bool;
 
@@ -233,7 +233,7 @@ package body Imago.IL is
   function Load (Type_Of: in Enum; Lump: in Pointer; Size: in UInt) return Bool
   is
     function ilLoadL (T: in Enum; L: in Pointer; S: in UInt) return Bool;
-    Pragma Import (StdCall, ilLoadL, "ilLoadL");
+    pragma Import (StdCall, ilLoadL, "ilLoadL");
   begin
     return ilLoadL (Type_Of, Lump, Size);
   end Load;
@@ -251,7 +251,7 @@ package body Imago.IL is
         Width: in UInt; Height: in UInt;
         Depth: in UInt; BPP: in UByte
       ) return Bool;
-    Pragma Import (StdCall, ilLoadData, "ilLoadData");
+    pragma Import (StdCall, ilLoadData, "ilLoadData");
 
     Success: Bool;
 
@@ -276,7 +276,7 @@ package body Imago.IL is
       ( L: in Pointer; S: in UInt; W: in UInt;
         H: in UInt; D: in UInt; B: in UByte
       ) return Bool;
-    Pragma Import (StdCall, ilLoadDataL, "ilLoadDataL");
+    pragma Import (StdCall, ilLoadDataL, "ilLoadDataL");
   begin
     return ilLoadDataL (Lump, Size, Width, Height, Depth, BPP);
   end Load_Data;
@@ -286,7 +286,7 @@ package body Imago.IL is
   function Load_Image (File_Name: in String) return Bool
   is
     function ilLoadImage (FileName: in CStrings.chars_ptr) return Bool;
-    Pragma Import (StdCall, ilLoadImage, "ilLoadImage");
+    pragma Import (StdCall, ilLoadImage, "ilLoadImage");
 
     Success: Bool;
 
@@ -303,7 +303,7 @@ package body Imago.IL is
   function Load_Pal (File_Name: in String) return Bool
   is
     function ilLoadPal (FileName: in CStrings.chars_ptr) return Bool;
-    Pragma Import (StdCall, ilLoadPal, "ilLoadImage");
+    pragma Import (StdCall, ilLoadPal, "ilLoadImage");
 
     Success: Bool;
 
@@ -320,7 +320,7 @@ package body Imago.IL is
   function Remove_Load (Ext: in String) return Bool
   is
     function ilRemoveLoad (Ext: in CStrings.chars_ptr) return Bool;
-    Pragma Import (StdCall, ilRemoveLoad, "ilRemoveLoad");
+    pragma Import (StdCall, ilRemoveLoad, "ilRemoveLoad");
 
     Success: Bool;
 
@@ -337,7 +337,7 @@ package body Imago.IL is
   function Remove_Save (Ext: in String) return Bool
   is
     function ilRemoveSave (Ext: in CStrings.chars_ptr) return Bool;
-    Pragma Import (StdCall, ilRemoveSave, "ilRemoveSave");
+    pragma Import (StdCall, ilRemoveSave, "ilRemoveSave");
 
     Success: Bool;
 
@@ -356,7 +356,7 @@ package body Imago.IL is
     function ilSave
       ( Type_Of: in Enum; FileName: in CStrings.chars_ptr
       ) return Bool;
-    Pragma Import (StdCall, ilSave, "ilSave");
+    pragma Import (StdCall, ilSave, "ilSave");
 
     Success: Bool;
 
@@ -375,7 +375,7 @@ package body Imago.IL is
     ) return UInt
   is
     function ilSaveL (T: in Enum; L: in Pointer; S: in UInt) return UInt;
-    Pragma Import (StdCall, ilSaveL, "ilSaveL");
+    pragma Import (StdCall, ilSaveL, "ilSaveL");
   begin
     return ilSaveL (Type_Of, Lump, Size);
   end Save;
@@ -385,7 +385,7 @@ package body Imago.IL is
   function Save_Data (File_Name: in String) return Bool
   is
     function ilSaveData (FileName: in CStrings.chars_ptr) return Bool;
-    Pragma Import (StdCall, ilSaveData, "ilSaveData");
+    pragma Import (StdCall, ilSaveData, "ilSaveData");
 
     Success: Bool;
 
@@ -402,7 +402,7 @@ package body Imago.IL is
   function Save_Image (File_Name: in String) return Bool
   is
     function ilSaveImage (FileName: in CStrings.chars_ptr) return Bool;
-    Pragma Import (StdCall, ilSaveImage, "ilSaveImage");
+    pragma Import (StdCall, ilSaveImage, "ilSaveImage");
 
     Success: Bool;
 
@@ -419,7 +419,7 @@ package body Imago.IL is
   function Save_Pal (File_Name: in String) return Bool
   is
     function ilSavePal (FileName: in CStrings.chars_ptr) return Bool;
-    Pragma Import (StdCall, ilSavePal, "ilSavePal");
+    pragma Import (StdCall, ilSavePal, "ilSavePal");
 
     Success: Bool;
 
@@ -436,7 +436,7 @@ package body Imago.IL is
   function Type_From_Ext (File_Name: in String) return Enum
   is
     function ilTypeFromExt (FileName: in CStrings.chars_ptr) return Enum;
-    Pragma Import (StdCall, ilTypeFromExt, "ilTypeFromExt");
+    pragma Import (StdCall, ilTypeFromExt, "ilTypeFromExt");
 
     Value: Enum;
 
