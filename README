@@ -26,6 +26,9 @@ Following subprograms are still not bound:
   void      iluRegionfv(ILpointf *Points, ILuint n);
   void      iluRegioniv(ILpointi *Points, ILuint n);
 
+To build with different than default CPU switches add "-XCPU=switches" to
+gprbuild command. Defualt CPU switches are: "-m64 -mssse3 -march=native -fPIC"
+
 ------------------------------------------------------------------------------
 --                    Copyright © 2015 darkestkhan                          --
 ------------------------------------------------------------------------------

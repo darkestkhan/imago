@@ -15,8 +15,7 @@ project Imago is
   for Library_Version use "lib" & Name & ".so." & Version;
 
   package Compiler is
-    -- FIXME: Should change CPU flags to something different for portability.
-    CPU   := ("-m64", "-mssse3", "-march=native", "-fPIC");
+    CPU   := external ("CPU", "-m64 -mssse3 -march=native -fPIC");
     OPT   := ("-O3", "-fomit-frame-pointer");
     WARN  := ("-Wall");
     STYLE := ("-gnaty2aAbdefhiklM80nOprSux");
