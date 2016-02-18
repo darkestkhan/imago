@@ -2,7 +2,7 @@
 -- EMAIL: <darkestkhan@gmail.com>                                           --
 -- License: ISC                                                             --
 --                                                                          --
---                    Copyright © 2015 darkestkhan                          --
+--                    Copyright © 2015  - 2016 darkestkhan                  --
 ------------------------------------------------------------------------------
 -- Permission to use, copy, modify, and/or distribute this software for any --
 -- purpose with or without fee is hereby granted, provided that the above   --
@@ -158,13 +158,10 @@ package Imago.ILUT is
   pragma Inline (GL_Sub_Tex);
 
   function GL_Set_Tex_2D (Tex_ID: in GL.UInt) return IL.Bool;
-  pragma Import (StdCall, GL_Set_Tex_2D, "ilutGLSetTex2D");
 
   function GL_Set_Tex_3D (Tex_ID: in GL.UInt) return IL.Bool;
-  pragma Import (StdCall, GL_Set_Tex_3D, "ilutGLSetTex3D");
 
   function GL_Tex_Image (Level: in GL.UInt) return IL.Bool;
-  pragma Import (StdCall, GL_Tex_Image, "ilutGLTexImage");
 
   ---------------------------------------------------------------------------
 
@@ -194,6 +191,9 @@ private
   pragma Import (StdCall, GL_Build_Mipmaps, "ilutGLBuildMipmaps");
   pragma Import (StdCall, GL_Screen, "ilutGLScreen");
   pragma Import (StdCall, GL_Screenie, "ilutGLScreenie");
+  pragma Import (StdCall, GL_Set_Tex_2D, "ilutGLSetTex2D");
+  pragma Import (StdCall, GL_Set_Tex_3D, "ilutGLSetTex3D");
+  pragma Import (StdCall, GL_Tex_Image, "ilutGLTexImage");
 
   --------------------------------------------------------------------------
 
