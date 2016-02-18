@@ -30,7 +30,7 @@ To build with different than default CPU switches add "-XCPU=switches" to
 gprbuild command. Defualt CPU switches are: "-m64 -mssse3 -march=native -fPIC"
 
 ------------------------------------------------------------------------------
---                    Copyright © 2015 darkestkhan                          --
+--                    Copyright © 2015 - 2016 darkestkhan                   --
 ------------------------------------------------------------------------------
 -- Permission to use, copy, modify, and/or distribute this software for any --
 -- purpose with or without fee is hereby granted, provided that the above   --
