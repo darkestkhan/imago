@@ -5,7 +5,8 @@ Ada types whenever possible. It is under GMGPL license. Full list of authors
 is in AUTHORS file.
 
 Depends on gprbuild (may build with gnatmake but not tested), devil and lumen
-(lumen is used for ILUT).
+(lumen is used for ILUT). [on Debian you can install libdevil-dev to satisfy
+DevIL dependency]
 
 When linking against devil don't forget to add "-lIL", "-lILU" and "-lILUT"
 flags.
