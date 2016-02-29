@@ -1,7 +1,7 @@
 [Incomplete] Ada binding to DevIL library.
 
 This library tries to be as close to original API as possible, while using
-Ada types whenever possible. It is under GMGPL license. Full list of authors
+Ada types whenever possible. It is under ISC license. Full list of authors
 is in AUTHORS file.
 
 Depends on gprbuild (may build with gnatmake but not tested), devil and lumen
