@@ -55,8 +55,8 @@ package body Imago.IL is
 
   function Apply_Pal (File_Name: in String) return Bool
   is
-    function ilApplyPal (FileName: in CStrings.chars_ptr) return Bool;
-    pragma Import (StdCall, ilApplyPal, "ilApplyPal");
+    function ilApplyPal (FileName: in CStrings.chars_ptr) return Bool
+      with Import => True, Convention => StdCall, External_Name => "ilApplyPal";
 
     Success: Bool;
 
@@ -76,8 +76,9 @@ package body Imago.IL is
   is
     function ilApplyProfile
       ( InProfile: in CStrings.chars_ptr; OutProfile: in CStrings.chars_ptr
-      ) return Bool;
-    pragma Import (StdCall, ilApplyProfile, "ilApplyProfile");
+      ) return Bool
+      with Import => True, Convention => StdCall,
+           External_Name => "ilApplyProfile";
 
     Success: Bool;
 
@@ -99,8 +100,9 @@ package body Imago.IL is
 
   function Determine_Type (File_Name: in String) return Enum
   is
-    function ilDetermineType (FileName: in CStrings.chars_ptr) return Enum;
-    pragma Import (StdCall, ilDetermineType, "ilDetermineType");
+    function ilDetermineType (FileName: in CStrings.chars_ptr) return Enum
+      with Import => True, Convention => StdCall,
+           External_Name => "ilDetermineType";
 
     Value: Enum;
 
@@ -116,8 +118,9 @@ package body Imago.IL is
 
   function Get_String (String_Name: in Enum) return String
   is
-    function ilGetString (String_Name: in Enum) return CStrings.chars_ptr;
-    pragma Import (StdCall, ilGetString, "ilGetString");
+    function ilGetString (String_Name: in Enum) return CStrings.chars_ptr
+      with Import => True, Convention => StdCall,
+           External_Name => "ilGetString";
   begin
     return IC.To_Ada (CStrings.Value (ilGetString (String_Name)));
   end Get_String;
@@ -126,8 +129,8 @@ package body Imago.IL is
 
   function Is_Valid (Type_Of: in Enum; File_Name: in String) return Bool
   is
-    function ilIsValid (T: in Enum; F: in CStrings.chars_ptr) return Bool;
-    pragma Import (StdCall, ilIsValid, "ilIsValid");
+    function ilIsValid (T: in Enum; F: in CStrings.chars_ptr) return Bool
+      with Import => True, Convention => StdCall, External_Name => "ilIsValid";
 
     Success: Bool;
 
@@ -143,8 +146,8 @@ package body Imago.IL is
 
   function Load (Type_Of: in Enum; File_Name: in String) return Bool
   is
-    function ilLoad (T: in Enum; F: in CStrings.chars_ptr) return Bool;
-    pragma Import (StdCall, ilLoad, "ilLoad");
+    function ilLoad (T: in Enum; F: in CStrings.chars_ptr) return Bool
+      with Import => True, Convention => StdCall, External_Name => "ilLoad";
 
     Success: Bool;
 
@@ -168,8 +171,8 @@ package body Imago.IL is
       ( FileName: in CStrings.chars_ptr;
         Width: in UInt; Height: in UInt;
         Depth: in UInt; BPP: in UByte
-      ) return Bool;
-    pragma Import (StdCall, ilLoadData, "ilLoadData");
+      ) return Bool
+    with Import => True, Convention => StdCall, External_Name => "ilLoadData";
 
     Success: Bool;
 
@@ -186,8 +189,9 @@ package body Imago.IL is
 
   function Load_Image (File_Name: in String) return Bool
   is
-    function ilLoadImage (FileName: in CStrings.chars_ptr) return Bool;
-    pragma Import (StdCall, ilLoadImage, "ilLoadImage");
+    function ilLoadImage (FileName: in CStrings.chars_ptr) return Bool
+      with Import => True, Convention => StdCall,
+           External_Name => "ilLoadImage";
 
     Success: Bool;
 
@@ -203,8 +207,9 @@ package body Imago.IL is
 
   function Load_Pal (File_Name: in String) return Bool
   is
-    function ilLoadPal (FileName: in CStrings.chars_ptr) return Bool;
-    pragma Import (StdCall, ilLoadPal, "ilLoadImage");
+    function ilLoadPal (FileName: in CStrings.chars_ptr) return Bool
+      with Import => True, Convention => StdCall,
+           External_Name => "ilLoadImage";
 
     Success: Bool;
 
@@ -220,8 +225,9 @@ package body Imago.IL is
 
   function Remove_Load (Ext: in String) return Bool
   is
-    function ilRemoveLoad (Ext: in CStrings.chars_ptr) return Bool;
-    pragma Import (StdCall, ilRemoveLoad, "ilRemoveLoad");
+    function ilRemoveLoad (Ext: in CStrings.chars_ptr) return Bool
+      with Import => True, Convention => StdCall,
+           External_Name => "ilRemoveLoad";
 
     Success: Bool;
 
@@ -237,8 +243,9 @@ package body Imago.IL is
 
   function Remove_Save (Ext: in String) return Bool
   is
-    function ilRemoveSave (Ext: in CStrings.chars_ptr) return Bool;
-    pragma Import (StdCall, ilRemoveSave, "ilRemoveSave");
+    function ilRemoveSave (Ext: in CStrings.chars_ptr) return Bool
+      with Import => True, Convention => StdCall,
+           External_Name => "ilRemoveSave";
 
     Success: Bool;
 
@@ -256,8 +263,8 @@ package body Imago.IL is
   is
     function ilSave
       ( Type_Of: in Enum; FileName: in CStrings.chars_ptr
-      ) return Bool;
-    pragma Import (StdCall, ilSave, "ilSave");
+      ) return Bool
+      with Import => True, Convention => StdCall, External_Name => "ilSave";
 
     Success: Bool;
 
@@ -273,8 +280,8 @@ package body Imago.IL is
 
   function Save_Data (File_Name: in String) return Bool
   is
-    function ilSaveData (FileName: in CStrings.chars_ptr) return Bool;
-    pragma Import (StdCall, ilSaveData, "ilSaveData");
+    function ilSaveData (FileName: in CStrings.chars_ptr) return Bool
+      with Import => True, Convention => StdCall, External_Name => "ilSaveData";
 
     Success: Bool;
 
@@ -290,8 +297,9 @@ package body Imago.IL is
 
   function Save_Image (File_Name: in String) return Bool
   is
-    function ilSaveImage (FileName: in CStrings.chars_ptr) return Bool;
-    pragma Import (StdCall, ilSaveImage, "ilSaveImage");
+    function ilSaveImage (FileName: in CStrings.chars_ptr) return Bool
+      with Import => True, Convention => StdCall,
+           External_Name => "ilSaveImage";
 
     Success: Bool;
 
@@ -307,8 +315,8 @@ package body Imago.IL is
 
   function Save_Pal (File_Name: in String) return Bool
   is
-    function ilSavePal (FileName: in CStrings.chars_ptr) return Bool;
-    pragma Import (StdCall, ilSavePal, "ilSavePal");
+    function ilSavePal (FileName: in CStrings.chars_ptr) return Bool
+      with Import => True, Convention => StdCall, External_Name => "ilSavePal";
 
     Success: Bool;
 
@@ -324,8 +332,9 @@ package body Imago.IL is
 
   function Type_From_Ext (File_Name: in String) return Enum
   is
-    function ilTypeFromExt (FileName: in CStrings.chars_ptr) return Enum;
-    pragma Import (StdCall, ilTypeFromExt, "ilTypeFromExt");
+    function ilTypeFromExt (FileName: in CStrings.chars_ptr) return Enum
+      with Import => True, Convention => StdCall,
+           External_Name => "ilTypeFromExt";
 
     Value: Enum;
 

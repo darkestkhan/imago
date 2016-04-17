@@ -731,8 +731,8 @@ package Imago.IL is
     with Import => True, Convention => StdCall,
          External_Name => "ilTexImageDxtc";
 
-  function Type_From_Ext (File_Name: in String) return Enum;
-  pragma Inline (Type_From_Ext);
+  function Type_From_Ext (File_Name: in String) return Enum
+    with Inline => True;
 
   function Type_Func (Mode: in Enum) return Bool
     with Import => True, Convention => StdCall, External_Name => "ilTypeFunc";
