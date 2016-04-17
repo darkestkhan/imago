@@ -21,7 +21,7 @@ project Imago is
     STYLE := ("-gnaty2aAbdefhiklM80nOprSux");
 
     Ada_Switches :=
-      ( "-gnat05", "-gnata", "-gnato", "-fstack-check", "-gnatW8",
+      ( "-gnat12", "-gnata", "-gnato", "-fstack-check", "-gnatW8",
         "-gnateE", "-gnatU", "-gnatf", "-gnatj80", "-gnatwa", "-gnatn"
       );
     for Default_Switches ("Ada") use Ada_Switches & CPU & OPT & WARN & STYLE;
