@@ -2,7 +2,7 @@
 -- EMAIL: <darkestkhan@gmail.com>                                           --
 -- License: ISC                                                             --
 --                                                                          --
---                    Copyright © 2015 darkestkhan                          --
+--                    Copyright © 2015 - 2016 darkestkhan                   --
 ------------------------------------------------------------------------------
 -- Permission to use, copy, modify, and/or distribute this software for any --
 -- purpose with or without fee is hereby granted, provided that the above   --
@@ -367,260 +367,375 @@ package Imago.IL is
 
   --------------------------------------------------------------------------
 
-  function Active_Face (Number: in UInt) return Bool;
+  function Active_Face (Number: in UInt) return Bool
+    with Import => True, Convention => StdCall, External_Name => "ilActiveFace";
 
-  function Active_Image (Number: in UInt) return Bool;
+  function Active_Image (Number: in UInt) return Bool
+    with Import => True, Convention => StdCall,
+         External_Name => "ilActiveImage";
 
-  function Active_Layer (Number: in UInt) return Bool;
+  function Active_Layer (Number: in UInt) return Bool
+    with Import => True, Convention => StdCall,
+         External_Name => "ilActiveLayer";
 
-  function Active_Mipmap (Number: in UInt) return Bool;
+  function Active_Mipmap (Number: in UInt) return Bool
+    with Import => True, Convention => StdCall,
+         External_Name => "ilActiveMipmap";
 
-  function Apply_Pal (File_Name: in String) return Bool;
-  pragma Inline (Apply_Pal);
+  function Apply_Pal (File_Name: in String) return Bool
+    with Inline => True;
 
   -- NOTE: Is this correct way to bind to this function?
   --       Probably not, but will try fixing it once something breaks over this.
   function Apply_Profile
     ( In_Profile: in String; Out_Profile: in String
-    ) return Bool;
-  pragma Inline (Apply_Profile);
+    ) return Bool
+    with Inline => True;
 
-  procedure Bind_Image (Image: in UInt);
+  procedure Bind_Image (Image: in UInt)
+    with Import => True, Convention => StdCall, External_Name => "ilBindImage";
 
   function Blit
     ( Source: in UInt; DestX: in Int; DestY: in Int; DestZ: in Int;
       SrcX: in UInt; SrcY: in UInt; SrcZ: in UInt;
       Width: in UInt; Height: in UInt; Depth: in UInt
-    ) return Bool;
+    ) return Bool
+    with Import => True, Convention => StdCall, External_Name => "ilBlit";
 
-  function Clamp_NTSC return Bool;
+  function Clamp_NTSC return Bool
+    with Import => True, Convention => StdCall, External_Name => "ilClampNTSC";
 
   procedure Clear_Color
-    ( Red: in ClampF; Green: in ClampF; Blue: in ClampF; Alpha: in ClampF );
+    ( Red: in ClampF; Green: in ClampF; Blue: in ClampF; Alpha: in ClampF )
+    with Import => True, Convention => StdCall,
+         External_Name => "ilClearColour";
 
   procedure Clear_Colour
-    ( Red: in ClampF; Green: in ClampF; Blue: in ClampF; Alpha: in ClampF );
+    ( Red: in ClampF; Green: in ClampF; Blue: in ClampF; Alpha: in ClampF )
+    with Import => True, Convention => StdCall,
+         External_Name => "ilClearColour";
 
-  function Clear_Image return Bool;
+  function Clear_Image return Bool
+    with Import => True, Convention => StdCall, External_Name => "ilClearImage";
 
-  function Clone_Cur_Image return UInt;
+  function Clone_Cur_Image return UInt
+    with Import => True, Convention => StdCall,
+         External_Name => "ilCloneCurImage";
 
   function Compress_DXT
     ( Data: in Pointer; Width: in UInt; Height: in UInt;
       Depth: in UInt; DXTC_Format: in Enum; DXTC_Size: in Pointer
-    ) return Pointer;
+    ) return Pointer
+    with Import => True, Convention => StdCall,
+         External_Name => "ilCompressDXT";
 
-  function Compress_Func (Mode: in Enum) return Bool;
+  function Compress_Func (Mode: in Enum) return Bool
+    with Import => True, Convention => StdCall,
+         External_Name => "ilCompressFunc";
 
-  function Convert_Image (Dest_Format: in Enum; Dest_Type: in Enum) return Bool;
+  function Convert_Image (Dest_Format: in Enum; Dest_Type: in Enum) return Bool
+    with Import => True, Convention => StdCall,
+         External_Name => "ilConvertImage";
 
-  function Convert_Pal (Dest_Format: in Enum) return Bool;
+  function Convert_Pal (Dest_Format: in Enum) return Bool
+    with Import => True, Convention => StdCall,
+         External_Name => "ilConvertPal";
 
-  function Copy_Image (Src: in UInt) return Bool;
+  function Copy_Image (Src: in UInt) return Bool
+    with Import => True, Convention => StdCall,
+         External_Name => "ilCopyImage";
 
   function Copy_Pixels
     ( XOff: in UInt; YOff: in UInt; ZOff: in UInt;
       Width: in UInt; Height: in UInt; Depth: in UInt;
       Format: in Enum; Type_Of: in Enum; Data: in Pointer
-    ) return UInt;
+    ) return UInt
+    with Import => True, Convention => StdCall,
+         External_Name => "ilCopyPixels";
 
-  function Create_Sub_Image (Type_Of: in Enum; Num: in UInt) return UInt;
+  function Create_Sub_Image (Type_Of: in Enum; Num: in UInt) return UInt
+    with Import => True, Convention => StdCall,
+         External_Name => "ilCreateSubImage";
 
-  function Default_Image return Bool;
+  function Default_Image return Bool
+    with Import => True, Convention => StdCall,
+         External_Name => "ilDefaultImage";
 
-  procedure Delete_Image (Num: in UInt);
+  procedure Delete_Image (Num: in UInt)
+    with Import => True, Convention => StdCall,
+         External_Name => "ilDeleteImage";
 
-  procedure Delete_Images (Num: in SizeI; Images: in Pointer);
+  procedure Delete_Images (Num: in SizeI; Images: in Pointer)
+    with Import => True, Convention => StdCall,
+         External_Name => "ilDeleteImages";
 
-  function Determine_Type (File_Name: in String) return Enum;
+  function Determine_Type (File_Name: in String) return Enum
+    with Inline => True;
 
-  function Determine_Type (Lump: in Pointer; Size: in UInt) return Enum;
-  pragma Inline (Determine_Type);
+  function Determine_Type (Lump: in Pointer; Size: in UInt) return Enum
+    with Import => True, Convention => StdCall,
+         External_Name => "ilDetermineTypeL";
 
-  function Disable (Mode: in Enum) return Bool;
+  function Disable (Mode: in Enum) return Bool
+    with Import => True, Convention => StdCall, External_Name => "ilDisable";
 
-  function DXTC_Data_To_Image return Bool;
+  function DXTC_Data_To_Image return Bool
+    with Import => True, Convention => StdCall,
+         External_Name => "ilDxtcDataToImage";
 
-  function DXTC_Data_To_Surface return Bool;
+  function DXTC_Data_To_Surface return Bool
+    with Import => True, Convention => StdCall,
+         External_Name => "ilDxtcDataToSurface";
 
-  function Enable (Mode: in Enum) return Bool;
+  function Enable (Mode: in Enum) return Bool
+    with Import => True, Convention => StdCall, External_Name => "ilEnable";
 
-  procedure Flip_Surface_DXTC_Data;
+  procedure Flip_Surface_DXTC_Data
+    with Import => True, Convention => StdCall,
+         External_Name => "ilFlipSurfaceDxtcData";
 
-  function Format_Func (Mode: in Enum) return Bool;
+  function Format_Func (Mode: in Enum) return Bool
+    with Import => True, Convention => StdCall,
+         External_Name => "ilFormatFunc";
 
-  function Get_Alpha (Type_Of: in Enum) return Pointer;
+  function Get_Alpha (Type_Of: in Enum) return Pointer
+    with Import => True, Convention => StdCall, External_Name => "ilGetAlpha";
 
-  function Gen_Image return UInt;
+  function Gen_Image return UInt
+    with Import => True, Convention => StdCall, External_Name => "ilGenImage";
 
-  procedure Gen_Images (Num: in SizeI; Images: in Pointer);
+  procedure Gen_Images (Num: in SizeI; Images: in Pointer)
+    with Import => True, Convention => StdCall, External_Name => "ilGenImages";
 
-  function Get_Boolean (Mode: in Enum) return Bool;
+  function Get_Boolean (Mode: in Enum) return Bool
+    with Import => True, Convention => StdCall, External_Name => "ilGetBoolean";
 
-  procedure Get_Boolean (Mode: in Enum; Param: in Pointer);
-  pragma Inline (Get_Boolean);
+  procedure Get_Boolean (Mode: in Enum; Param: in Pointer)
+    with Import => True, Convention => StdCall,
+         External_Name => "ilGetBooleanv";
 
-  function Get_Data return Pointer;
+  function Get_Data return Pointer
+    with Import => True, Convention => StdCall, External_Name => "ilGetData";
 
   function Get_DXTC_Data
     ( Buffer: in Pointer; Buffer_Size: in UInt; DXTC_Format: in Enum
-    ) return UInt;
+    ) return UInt
+    with Import => True, Convention => StdCall,
+         External_Name => "ilGetDXTCData";
 
-  function Get_Error return Enum;
+  function Get_Error return Enum
+    with Import => True, Convention => StdCall, External_Name => "ilGetError";
 
-  function Get_Integer (Mode: in Enum) return Int;
+  function Get_Integer (Mode: in Enum) return Int
+    with Import => True, Convention => StdCall, External_Name => "ilGetInteger";
 
-  procedure Get_Integer (Mode: in Enum; Param: in Pointer);
-  pragma Inline (Get_Integer);
+  procedure Get_Integer (Mode: in Enum; Param: in Pointer)
+    with Import => True, Convention => StdCall,
+         External_Name => "ilGetIntegerv";
 
-  function Get_Lump_Pos return UInt;
+  function Get_Lump_Pos return UInt
+    with Import => True, Convention => StdCall, External_Name => "ilGetLumpPos";
 
-  function Get_Palette return Pointer;
+  function Get_Palette return Pointer
+    with Import => True, Convention => StdCall, External_Name => "ilGetPalette";
 
-  function Get_String (String_Name: in Enum) return String;
-  pragma Inline (Get_String);
+  function Get_String (String_Name: in Enum) return String
+    with Inline => True;
 
-  procedure Hint (Target: in Enum; Mode: in Enum);
+  procedure Hint (Target: in Enum; Mode: in Enum)
+    with Import => True, Convention => StdCall, External_Name => "ilHint";
 
-  function Invert_Surface_DXTC_Data_Alpha return Bool;
+  function Invert_Surface_DXTC_Data_Alpha return Bool
+    with Import => True, Convention => StdCall,
+         External_Name => "ilInvertSurfaceDxtcDataAlpha";
 
-  procedure Init;
+  procedure Init
+    with Import => True, Convention => StdCall, External_Name => "ilInit";
 
-  function Image_To_DXTC_Data (Format: in Enum) return Bool;
+  function Image_To_DXTC_Data (Format: in Enum) return Bool
+    with Import => True, Convention => StdCall,
+         External_Name => "ilImageToDxtcData";
 
-  function Is_Disabled (Mode: in Enum) return Bool;
+  function Is_Disabled (Mode: in Enum) return Bool
+    with Import => True, Convention => StdCall, External_Name => "ilIsDisabled";
 
-  function Is_Enabled (Mode: in Enum) return Bool;
+  function Is_Enabled (Mode: in Enum) return Bool
+    with Import => True, Convention => StdCall, External_Name => "ilIsEnabled";
 
-  function Is_Image (Image: in UInt) return Bool;
+  function Is_Image (Image: in UInt) return Bool
+    with Import => True, Convention => StdCall, External_Name => "ilIsImage";
 
-  function Is_Valid (Type_Of: in Enum; File_Name: in String) return Bool;
+  function Is_Valid (Type_Of: in Enum; File_Name: in String) return Bool
+    with Inline => True;
 
   function Is_Valid
     ( Type_Of: in Enum; Lump: in Pointer; Size: in UInt
-    ) return Bool;
-  pragma Inline (Is_Valid);
+    ) return Bool
+    with Import => True, Convention => StdCall, External_Name => "ilIsValidL";
 
   procedure Key_Color
-    ( Red: in ClampF; Green: in ClampF; Blue: in ClampF; Alpha: in ClampF );
+    ( Red: in ClampF; Green: in ClampF; Blue: in ClampF; Alpha: in ClampF )
+    with Import => True, Convention => StdCall, External_Name => "ilKeyColour";
 
   procedure Key_Colour
-    ( Red: in ClampF; Green: in ClampF; Blue: in ClampF; Alpha: in ClampF );
+    ( Red: in ClampF; Green: in ClampF; Blue: in ClampF; Alpha: in ClampF )
+    with Import => True, Convention => StdCall, External_Name => "ilKeyColour";
 
-  function Load (Type_Of: in Enum; File_Name: in String) return Bool;
+  function Load (Type_Of: in Enum; File_Name: in String) return Bool
+    with Inline => True;
 
   function Load
     ( Type_Of: in Enum; Lump: in Pointer; Size: in UInt
-    ) return Bool;
-  pragma Inline (Load);
+    ) return Bool
+    with Import => True, Convention => StdCall, External_Name => "ilLoadL";
 
   function Load_Data
     ( File_Name: in String;
       Width: in UInt; Height: in UInt;
       Depth: in UInt; BPP: in UByte
-    ) return Bool;
+    ) return Bool
+    with Inline => True;
 
   function Load_Data
     ( Lump: in Pointer; Size: in UInt;
       Width: in UInt; Height: in UInt;
       Depth: in UInt; BPP: in UByte
-    ) return Bool;
-  pragma Inline (Load_Data);
+    ) return Bool
+    with Import => True, Convention => StdCall, External_Name => "ilLoadDataL";
 
-  function Load_Image (File_Name: in String) return Bool;
-  pragma Inline (Load_Image);
+  function Load_Image (File_Name: in String) return Bool
+    with Inline => True;
 
-  function Load_Pal (File_Name: in String) return Bool;
-  pragma Inline (Load_Pal);
+  function Load_Pal (File_Name: in String) return Bool
+    with Inline => True;
 
-  procedure Mod_Alpha (Alpha_Value: in Double);
+  procedure Mod_Alpha (Alpha_Value: in Double)
+    with Import => True, Convention => StdCall, External_Name => "ilModAlpha";
 
-  function Original_Func (Mode: in Enum) return Bool;
+  function Original_Func (Mode: in Enum) return Bool
+    with Import => True, Convention => StdCall, External_Name => "ilOriginFunc";
 
   function Overlay_Image
     ( Source: in UInt;  XCoord: in Int;
       YCoord: in Int;   ZCoord: in Int
-    ) return Bool;
+    ) return Bool
+    with Import => True, Convention => StdCall,
+         External_Name => "ilOverlayImage";
 
-  procedure Pop_Attrib;
+  procedure Pop_Attrib
+    with Import => True, Convention => StdCall, External_Name => "ilPopAttrib";
 
   -- NOTE: Type of Bits may need to be changed from UInt to Bitfield
-  procedure Push_Attrib (Bits: in UInt);
+  procedure Push_Attrib (Bits: in UInt)
+    with Import => True, Convention => StdCall, External_Name => "ilPushAttrib";
 
-  procedure Register_Format (Format: in Enum);
+  procedure Register_Format (Format: in Enum)
+    with Import => True, Convention => StdCall,
+         External_Name => "ilRegisterFormat";
 
-  function Register_Mip_Num (Num: in UInt) return Bool;
+  function Register_Mip_Num (Num: in UInt) return Bool
+    with Import => True, Convention => StdCall,
+         External_Name => "ilRegisterMipNum";
 
-  function Register_Num_Faces (Num: in UInt) return Bool;
+  function Register_Num_Faces (Num: in UInt) return Bool
+    with Import => True, Convention => StdCall,
+         External_Name => "ilRegisterNumFaces";
 
-  function Register_Num_Images (Num: in UInt) return Bool;
+  function Register_Num_Images (Num: in UInt) return Bool
+    with Import => True, Convention => StdCall,
+         External_Name => "ilRegisterNumImages";
 
-  procedure Register_Origin (Origin: in Enum);
+  procedure Register_Origin (Origin: in Enum)
+    with Import => True, Convention => StdCall,
+         External_Name => "ilRegisterOrigin";
 
-  procedure Register_Pal (Pal: in Pointer; Size: in UInt; Type_Of: in Enum);
+  procedure Register_Pal (Pal: in Pointer; Size: in UInt; Type_Of: in Enum)
+    with Import => True, Convention => StdCall,
+         External_Name => "ilRegisterPal";
 
-  procedure Register_Type (Type_Of: in Enum);
+  procedure Register_Type (Type_Of: in Enum)
+    with Import => True, Convention => StdCall,
+         External_Name => "ilRegisterType";
 
-  function Remove_Load (Ext: in String) return Bool;
-  pragma Inline (Remove_Load);
+  function Remove_Load (Ext: in String) return Bool
+    with Inline => True;
 
-  function Remove_Save (Ext: in String) return Bool;
-  pragma Inline (Remove_Save);
+  function Remove_Save (Ext: in String) return Bool
+    with Inline => True;
 
-  procedure Reset_Memory;
+  procedure Reset_Memory
+    with Import => True, Convention => StdCall,
+         External_Name => "ilResetMemory";
 
-  procedure Reset_Read;
+  procedure Reset_Read
+    with Import => True, Convention => StdCall, External_Name => "ilResetRead";
 
-  procedure Reset_Write;
+  procedure Reset_Write
+    with Import => True, Convention => StdCall,
+         External_Name => "ilResetMemory";
 
-  function Save (Type_Of: in Enum; File_Name: in String) return Bool;
+  function Save (Type_Of: in Enum; File_Name: in String) return Bool
+    with Inline => True;
 
   function Save
     ( Type_Of: in Enum; Lump: in Pointer; Size: in UInt
-    ) return UInt;
-  pragma Inline (Save);
+    ) return UInt
+    with Import => True, Convention => StdCall, External_Name => "ilSaveL";
 
-  function Save_Data (File_Name: in String) return Bool;
-  pragma Inline (Save_Data);
+  function Save_Data (File_Name: in String) return Bool
+    with Inline => True;
 
-  function Save_Image (File_Name: in String) return Bool;
-  pragma Inline (Save_Image);
+  function Save_Image (File_Name: in String) return Bool
+    with Inline => True;
 
-  function Save_Pal (File_Name: in String) return Bool;
-  pragma Inline (Save_Pal);
+  function Save_Pal (File_Name: in String) return Bool
+    with Inline => True;
 
-  function Set_Alpha (Alpha_Value: in Double) return Bool;
+  function Set_Alpha (Alpha_Value: in Double) return Bool
+    with Import => True, Convention => StdCall, External_Name => "ilSetAlpha";
 
-  function Set_Data (Data: in Pointer) return Bool;
+  function Set_Data (Data: in Pointer) return Bool
+    with Import => True, Convention => StdCall, External_Name => "ilSetData";
 
-  function Set_Duration (Duration: in UInt) return Bool;
+  function Set_Duration (Duration: in UInt) return Bool
+    with Import => True, Convention => StdCall,
+         External_Name => "ilSetDuration";
 
-  procedure Set_Integer (Mode: in Enum; Param: in Int);
+  procedure Set_Integer (Mode: in Enum; Param: in Int)
+    with Import => True, Convention => StdCall, External_Name => "ilSetInteger";
 
   procedure Set_Pixels
     ( XOff: in Int; YOff: in Int; ZOff: in Int;
       Width: in UInt; Height: in UInt; Depth: in UInt;
       Format: in Enum; Type_Of: in Enum; Data: in Pointer
-    );
+    )
+    with Import => True, Convention => StdCall, External_Name => "ilSetPixels";
 
-  procedure Shut_Down;
+  procedure Shut_Down
+    with Import => True, Convention => StdCall, External_Name => "ilShutDown";
 
-  function Surface_To_DXTC_Data (Format: in Enum) return Bool;
+  function Surface_To_DXTC_Data (Format: in Enum) return Bool
+    with Import => True, Convention => StdCall,
+         External_Name => "ilSurfaceToDxtcData";
 
   function Tex_Image
     ( Width: in UInt; Height: in UInt; Depth: in UInt;
       Num_Channels: in UByte; Format: in Enum; Type_Of: in Enum;
       Data: in Pointer
-    ) return Bool;
+    ) return Bool
+    with Import => True, Convention => StdCall, External_Name => "ilTexImage";
 
   function Tex_Image_DXTC
     ( W: in Int; H: in Int; D: in Int; DXT_Format: in Enum; Data: in Pointer
-    ) return Bool;
+    ) return Bool
+    with Import => True, Convention => StdCall,
+         External_Name => "ilTexImageDxtc";
 
   function Type_From_Ext (File_Name: in String) return Enum;
   pragma Inline (Type_From_Ext);
 
-  function Type_Func (Mode: in Enum) return Bool;
+  function Type_Func (Mode: in Enum) return Bool
+    with Import => True, Convention => StdCall, External_Name => "ilTypeFunc";
 
 -- Unbound subprograms:
 -- ILenum     ilDetermineTypeF(ILHANDLE File);
@@ -643,89 +758,6 @@ package Imago.IL is
 --              ( ILHANDLE File, ILuint Width, ILuint Height,
 --                ILuint Depth, ILubyte Bpp
 --              );
-
-  --------------------------------------------------------------------------
-
-private
-
-  --------------------------------------------------------------------------
-
-                            -------------------
-                            -- I M P O R T S --
-                            -------------------
-
-  --------------------------------------------------------------------------
-
-  pragma Import (StdCall, Active_Face, "ilActiveFace");
-  pragma Import (StdCall, Active_Image, "ilActiveImage");
-  pragma Import (StdCall, Active_Layer, "ilActiveLayer");
-  pragma Import (StdCall, Active_Mipmap, "ilActiveMipmap");
-  pragma Import (StdCall, Bind_Image, "ilBindImage");
-  pragma Import (StdCall, Blit, "ilBlit");
-  pragma Import (StdCall, Clamp_NTSC, "ilClampNTSC");
-  pragma Import (StdCall, Clear_Color, "ilClearColour");
-  pragma Import (StdCall, Clear_Colour, "ilClearColour");
-  pragma Import (StdCall, Clear_Image, "ilClearImage");
-  pragma Import (StdCall, Clone_Cur_Image, "ilCloneCurImage");
-  pragma Import (StdCall, Compress_DXT, "ilCompressDXT");
-  pragma Import (StdCall, Compress_Func, "ilCompressFunc");
-  pragma Import (StdCall, Convert_Image, "ilConvertImage");
-  pragma Import (StdCall, Convert_Pal, "ilConvertPal");
-  pragma Import (StdCall, Copy_Image, "ilCopyImage");
-  pragma Import (StdCall, Copy_Pixels, "ilCopyPixels");
-  pragma Import (StdCall, Create_Sub_Image, "ilCreateSubImage");
-  pragma Import (StdCall, Default_Image, "ilDefaultImage");
-  pragma Import (StdCall, Delete_Image, "ilDeleteImage");
-  pragma Import (StdCall, Delete_Images, "ilDeleteImages");
-  pragma Import (StdCall, Disable, "ilDisable");
-  pragma Import (StdCall, DXTC_Data_To_Image, "ilDxtcDataToImage");
-  pragma Import (StdCall, DXTC_Data_To_Surface, "ilDxtcDataToSurface");
-  pragma Import (StdCall, Enable, "ilEnable");
-  pragma Import (StdCall, Flip_Surface_DXTC_Data, "ilFlipSurfaceDxtcData");
-  pragma Import (StdCall, Format_Func, "ilFormatFunc");
-  pragma Import (StdCall, Get_Alpha, "ilGetAlpha");
-  pragma Import (StdCall, Gen_Image, "ilGenImage");
-  pragma Import (StdCall, Gen_Images, "ilGenImages");
-  pragma Import (StdCall, Get_Data, "ilGetData");
-  pragma Import (StdCall, Get_DXTC_Data, "ilGetDXTCData");
-  pragma Import (StdCall, Get_Error, "ilGetError");
-  pragma Import (StdCall, Get_Lump_Pos, "ilGetLumpPos");
-  pragma Import (StdCall, Get_Palette, "ilGetPalette");
-  pragma Import (StdCall, Hint, "ilHint");
-  pragma Import
-    ( StdCall, Invert_Surface_DXTC_Data_Alpha, "ilInvertSurfaceDxtcDataAlpha" );
-  pragma Import (StdCall, Init, "ilInit");
-  pragma Import (StdCall, Image_To_DXTC_Data, "ilImageToDxtcData");
-  pragma Import (StdCall, Is_Disabled, "ilIsDisabled");
-  pragma Import (StdCall, Is_Enabled, "ilIsEnabled");
-  pragma Import (StdCall, Is_Image, "ilIsImage");
-  pragma Import (StdCall, Key_Color, "ilKeyColour");
-  pragma Import (StdCall, Key_Colour, "ilKeyColour");
-  pragma Import (StdCall, Mod_Alpha, "ilModAlpha");
-  pragma Import (StdCall, Original_Func, "ilOriginFunc");
-  pragma Import (StdCall, Overlay_Image, "ilOverlayImage");
-  pragma Import (StdCall, Pop_Attrib, "ilPopAttrib");
-  pragma Import (StdCall, Push_Attrib, "ilPushAttrib");
-  pragma Import (StdCall, Register_Format, "ilRegisterFormat");
-  pragma Import (StdCall, Register_Mip_Num, "ilRegisterMipNum");
-  pragma Import (StdCall, Register_Num_Faces, "ilRegisterNumFaces");
-  pragma Import (StdCall, Register_Num_Images, "ilRegisterNumImages");
-  pragma Import (StdCall, Register_Origin, "ilRegisterOrigin");
-  pragma Import (StdCall, Register_Pal, "ilRegisterPal");
-  pragma Import (StdCall, Register_Type, "ilRegisterType");
-  pragma Import (StdCall, Reset_Memory, "ilResetMemory");
-  pragma Import (StdCall, Reset_Read, "ilResetRead");
-  pragma Import (StdCall, Reset_Write, "ilResetWrite");
-  pragma Import (StdCall, Set_Alpha, "ilSetAlpha");
-  pragma Import (StdCall, Set_Data, "ilSetData");
-  pragma Import (StdCall, Set_Duration, "ilSetDuration");
-  pragma Import (StdCall, Set_Integer, "ilSetInteger");
-  pragma Import (StdCall, Set_Pixels, "ilSetPixels");
-  pragma Import (StdCall, Shut_Down, "ilShutDown");
-  pragma Import (StdCall, Surface_To_DXTC_Data, "ilSurfaceToDxtcData");
-  pragma Import (StdCall, Tex_Image, "ilTexImage");
-  pragma Import (StdCall, Tex_Image_DXTC, "ilTexImageDxtc");
-  pragma Import (StdCall, Type_Func, "ilTypeFunc");
 
   --------------------------------------------------------------------------
 
