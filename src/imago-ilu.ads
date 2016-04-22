@@ -90,185 +90,202 @@ package Imago.ILU is
 
   --------------------------------------------------------------------------
 
-  function Alienify return IL.Bool;
+  function Alienify return IL.Bool
+    with Import => True, Convention => StdCall, External_Name => "iluAlienify";
 
-  function Blur_Avg (Iter: in IL.UInt) return IL.Bool;
+  function Blur_Avg (Iter: in IL.UInt) return IL.Bool
+    with Import => True, Convention => StdCall, External_Name => "iluBlurAvg";
 
-  function Blur_Gaussian (Iter: in IL.UInt) return IL.Bool;
+  function Blur_Gaussian (Iter: in IL.UInt) return IL.Bool
+    with Import => True, Convention => StdCall,
+         External_Name => "iluBlurGaussian";
 
-  function Build_Mipmaps return IL.Bool;
+  function Build_Mipmaps return IL.Bool
+    with Import => True, Convention => StdCall,
+         External_Name => "iluBuildMipmaps";
 
-  function Colors_Used return IL.UInt;
+  function Colors_Used return IL.UInt
+    with Import => True, Convention => StdCall,
+         External_Name => "iluColoursUsed";
 
-  function Colours_Used return IL.UInt;
+  function Colours_Used return IL.UInt
+    with Import => True, Convention => StdCall,
+         External_Name => "iluColoursUsed";
 
-  function Compare_Image (Comp: in IL.UInt) return IL.Bool;
+  function Compare_Image (Comp: in IL.UInt) return IL.Bool
+    with Import => True, Convention => StdCall,
+         External_Name => "iluCompareImage";
 
-  function Contrast (Contrats: in Float) return IL.Bool;
+  function Contrast (Contrats: in Float) return IL.Bool
+    with Import => True, Convention => StdCall, External_Name => "iluContrast";
 
   function Crop
     ( XOff: in IL.UInt; YOff: in IL.UInt; ZOff: in IL.UInt;
       Width: in IL.UInt; Height: in IL.UInt; Depth: in IL.UInt
-    ) return IL.Bool;
+    ) return IL.Bool
+    with Import => True, Convention => StdCall, External_Name => "iluCrop";
 
-  procedure Delete_Image (ID: in IL.UInt);
+  procedure Delete_Image (ID: in IL.UInt)
+    with Import => True, Convention => StdCall,
+         External_Name => "iluDeleteImage";
 
-  function Edge_Detect_E return IL.Bool;
+  function Edge_Detect_E return IL.Bool
+    with Import => True, Convention => StdCall,
+         External_Name => "iluEdgeDetectE";
 
-  function Edge_Detect_P return IL.Bool;
+  function Edge_Detect_P return IL.Bool
+    with Import => True, Convention => StdCall,
+         External_Name => "iluEdgeDetectP";
 
-  function Edge_Detect_S return IL.Bool;
+  function Edge_Detect_S return IL.Bool
+    with Import => True, Convention => StdCall,
+         External_Name => "iluEdgeDetectS";
 
-  function Emboss return IL.Bool;
+  function Emboss return IL.Bool
+    with Import => True, Convention => StdCall, External_Name => "iluEmboss";
 
   function Enlarge_Canvas
     ( Width: in IL.UInt; Height: in IL.UInt; Depth: in IL.UInt
-    ) return IL.Bool;
+    ) return IL.Bool
+    with Import => True, Convention => StdCall,
+         External_Name => "iluEnlargeCanvas";
 
   function Enlarge_Image
     ( XDim: in Float; YDim: in Float; ZDim: in Float
-    ) return IL.Bool;
+    ) return IL.Bool
+    with Import => True, Convention => StdCall,
+         External_Name => "iluEnlargeImage";
 
-  function Error_String (String_Name: in IL.Enum) return String;
-  pragma Inline (Error_String);
+  function Error_String (String_Name: in IL.Enum) return String
+    with Inline => True;
 
-  function Equalize return IL.Bool;
+  function Equalize return IL.Bool
+    with Import => True, Convention => StdCall, External_Name => "iluEqualize";
 
   function Convolution
     ( Matrix: in IL.Pointer; Scale: in IL.Int; Bias: in IL.Int
-    ) return IL.Bool;
+    ) return IL.Bool
+    with Import => True, Convention => StdCall,
+         External_Name => "iluConvolution";
 
-  function Flip_Image return IL.Bool;
+  function Flip_Image return IL.Bool
+    with Import => True, Convention => StdCall, External_Name => "iluFlipImage";
 
-  function Gamma_Correct (Gamma: in Float) return IL.Bool;
+  function Gamma_Correct (Gamma: in Float) return IL.Bool
+    with Import => True, Convention => StdCall,
+         External_Name => "iluGammaCorrect";
 
-  function Gen_Image return IL.UInt;
+  function Gen_Image return IL.UInt
+    with Import => True, Convention => StdCall, External_Name => "iluGenImage";
 
-  function  Get_Integer (Mode: in IL.Enum) return IL.Int;
+  function  Get_Integer (Mode: in IL.Enum) return IL.Int
+    with Import => True, Convention => StdCall,
+         External_Name => "iluGetInteger";
 
-  procedure Get_Integer (Mode: in IL.Enum; Param: in IL.Pointer);
-  pragma Inline (Get_Integer);
+  procedure Get_Integer (Mode: in IL.Enum; Param: in IL.Pointer)
+    with Import => True, Convention => StdCall,
+         External_Name => "iluGetIntegerv";
 
-  function Get_String (String_Name: in IL.Enum) return String;
-  pragma Inline (Get_String);
+  function Get_String (String_Name: in IL.Enum) return String
+    with Inline => True;
 
-  procedure Image_Parameter (P_Name: in IL.Enum; Param: in IL.Enum);
+  procedure Image_Parameter (P_Name: in IL.Enum; Param: in IL.Enum)
+    with Import => True, Convention => StdCall,
+         External_Name => "iluImageParameter";
 
-  procedure Init;
+  procedure Init
+    with Import => True, Convention => StdCall, External_Name => "iluInit";
 
-  function Invert_Alpha return IL.Bool;
+  function Invert_Alpha return IL.Bool
+    with Import => True, Convention => StdCall,
+         External_Name => "iluInvertAlpha";
 
-  function Load_Image (File_Name: in String) return IL.UInt;
-  pragma Inline (Load_Image);
+  function Load_Image (File_Name: in String) return IL.UInt
+    with Inline => True;
 
-  function Mirror return IL.Bool;
+  function Mirror return IL.Bool
+    with Import => True, Convention => StdCall, External_Name => "iluMirror";
 
-  function Negative return IL.Bool;
+  function Negative return IL.Bool
+    with Import => True, Convention => StdCall, External_Name => "iluNegative";
 
-  function Noisify (Tolerance: in IL.ClampF) return IL.Bool;
+  function Noisify (Tolerance: in IL.ClampF) return IL.Bool
+    with Import => True, Convention => StdCall, External_Name => "iluNoisify";
 
-  function Pixelize (Pix_Size: in IL.UInt) return IL.Bool;
+  function Pixelize (Pix_Size: in IL.UInt) return IL.Bool
+    with Import => True, Convention => StdCall, External_Name => "iluPixelize";
 
   function Replace_Color
     ( Red: in IL.UByte; Green: in IL.UByte;
       Blue: in IL.UByte; Tolerance: in Float
-    ) return IL.Bool;
+    ) return IL.Bool
+    with Import => True, Convention => StdCall,
+         External_Name => "iluReplaceColour";
 
   function Replace_Colour
     ( Red: in IL.UByte; Green: in IL.UByte;
       Blue: in IL.UByte; Tolerance: in Float
-    ) return IL.Bool;
+    ) return IL.Bool
+    with Import => True, Convention => StdCall,
+         External_Name => "iluReplaceColour";
 
-  function Rotate (Angle: in Float) return IL.Bool;
+  function Rotate (Angle: in Float) return IL.Bool
+    with Import => True, Convention => StdCall, External_Name => "iluRotate";
 
   function Rotate
     ( X: in Float; Y: in Float; Z: in Float; Angle: in Float
-    ) return IL.Bool;
-  pragma Inline (Rotate);
+    ) return IL.Bool
+    with Import => True, Convention => StdCall, External_Name => "iluRotate3D";
 
-  function Saturate (Saturation: in Float) return IL.Bool;
+  function Saturate (Saturation: in Float) return IL.Bool
+    with Import => True, Convention => StdCall,
+         External_Name => "iluSaturate1f";
 
   function Saturate
     ( R: in Float; G: in Float; B: in Float; Saturation: in Float
-    ) return IL.Bool;
-  pragma Inline (Saturate);
+    ) return IL.Bool
+    with Import => True, Convention => StdCall,
+         External_Name => "iluSaturate4f";
 
   function Scale
     ( Width: in IL.UInt; Height: in IL.UInt; Depth: in IL.UInt
-    ) return IL.Bool;
+    ) return IL.Bool
+    with Import => True, Convention => StdCall, External_Name => "iluScale";
 
-  function Scale_Alpha (Scale: in Float) return IL.Bool;
+  function Scale_Alpha (Scale: in Float) return IL.Bool
+    with Import => True, Convention => StdCall,
+         External_Name => "iluScaleAlpha";
 
-  function Scale_Colors (R: in Float; G: in Float; B: in Float) return IL.Bool;
+  function Scale_Colors (R: in Float; G: in Float; B: in Float) return IL.Bool
+    with Import => True, Convention => StdCall,
+         External_Name => "iluScaleColours";
 
-  function Scale_Colours (R: in Float; G: in Float; B: in Float) return IL.Bool;
+  function Scale_Colours (R: in Float; G: in Float; B: in Float) return IL.Bool
+    with Import => True, Convention => StdCall,
+         External_Name => "iluScaleColours";
 
-  function Set_Language (Language: in IL.Enum) return IL.Bool;
+  function Set_Language (Language: in IL.Enum) return IL.Bool
+    with Import => True, Convention => StdCall,
+         External_Name => "iluSetLanguage";
 
-  function Sharpen (Factor: in Float; Iter: in IL.UInt) return IL.Bool;
+  function Sharpen (Factor: in Float; Iter: in IL.UInt) return IL.Bool
+    with Import => True, Convention => StdCall, External_Name => "iluSharpen";
 
-  function Swap_Colors return IL.Bool;
+  function Swap_Colors return IL.Bool
+    with Import => True, Convention => StdCall,
+         External_Name => "iluSwapColours";
 
-  function Swap_Colours return IL.Bool;
+  function Swap_Colours return IL.Bool
+    with Import => True, Convention => StdCall,
+         External_Name => "iluSwapColours";
 
-  function Wave (Angle: in Float) return IL.Bool;
+  function Wave (Angle: in Float) return IL.Bool
+    with Import => True, Convention => StdCall, External_Name => "iluWave";
 
--- Unbound subprograms:
+-- Unbounded subprograms:
 -- void           iluGetImageInfo(ILinfo *Info);
 -- void           iluRegionfv(ILpointf *Points, ILuint n);
 -- void           iluRegioniv(ILpointi *Points, ILuint n);
-
-  --------------------------------------------------------------------------
-
-private
-
-  --------------------------------------------------------------------------
-
-                            -------------------
-                            -- I M P O R T S --
-                            -------------------
-
-  --------------------------------------------------------------------------
-
-  pragma Import (StdCall, Alienify, "iluAlienify");
-  pragma Import (StdCall, Blur_Avg, "iluBlurAvg");
-  pragma Import (StdCall, Blur_Gaussian, "iluBlurGaussian");
-  pragma Import (StdCall, Build_Mipmaps, "iluBuildMipmaps");
-  pragma Import (StdCall, Colors_Used, "iluColoursUsed");
-  pragma Import (StdCall, Colours_Used, "iluColoursUsed");
-  pragma Import (StdCall, Compare_Image, "iluCompareImage");
-  pragma Import (StdCall, Contrast, "iluContrast");
-  pragma Import (StdCall, Crop, "iluCrop");
-  pragma Import (StdCall, Delete_Image, "iluDeleteImage");
-  pragma Import (StdCall, Edge_Detect_E, "iluEdgeDetectE");
-  pragma Import (StdCall, Edge_Detect_P, "iluEdgeDetectP");
-  pragma Import (StdCall, Edge_Detect_S, "iluEdgeDetectS");
-  pragma Import (StdCall, Emboss, "iluEmboss");
-  pragma Import (StdCall, Enlarge_Canvas, "iluEnlargeCanvas");
-  pragma Import (StdCall, Enlarge_Image, "iluEnlargeImage");
-  pragma Import (StdCall, Equalize, "iluEqualize");
-  pragma Import (StdCall, Convolution, "iluConvolution");
-  pragma Import (StdCall, Flip_Image, "iluFlipImage");
-  pragma Import (StdCall, Gamma_Correct, "iluGammaCorrect");
-  pragma Import (StdCall, Gen_Image, "iluGenImage");
-  pragma Import (StdCall, Image_Parameter, "iluImageParameter");
-  pragma Import (StdCall, Init, "iluInit");
-  pragma Import (StdCall, Invert_Alpha, "iluInvertAlpha");
-  pragma Import (StdCall, Mirror, "iluMirror");
-  pragma Import (StdCall, Negative, "iluNegative");
-  pragma Import (StdCall, Noisify, "iluNoisify");
-  pragma Import (StdCall, Pixelize, "iluPixelize");
-  pragma Import (StdCall, Replace_Color, "iluReplaceColour");
-  pragma Import (StdCall, Replace_Colour, "iluReplaceColour");
-  pragma Import (StdCall, Scale, "iluScale");
-  pragma Import (StdCall, Scale_Alpha, "iluScaleAlpha");
-  pragma Import (StdCall, Scale_Colors, "iluScaleColours");
-  pragma Import (StdCall, Scale_Colours, "iluScaleColours");
-  pragma Import (StdCall, Set_Language, "iluSetLanguage");
-  pragma Import (StdCall, Sharpen, "iluSharpen");
-  pragma Import (StdCall, Swap_Colors, "iluSwapColours");
-  pragma Import (StdCall, Swap_Colours, "iluSwapColours");
-  pragma Import (StdCall, Wave, "iluWave");
 
   --------------------------------------------------------------------------
 
