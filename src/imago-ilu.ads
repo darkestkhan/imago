@@ -29,7 +29,43 @@ package Imago.ILU is
 
   --------------------------------------------------------------------------
 
-  -- TODO: Bind types (ILinfo, ILpointf, ILpointi).
+  -- NOTE: Really, this one should be replaced with type whose definition
+  -- is much more Ada-like.
+  type Info is
+  record
+    ID          : IL.UInt;    -- the image's ID
+    Data        : IL.Pointer; -- the image's data
+    Width       : IL.UInt;    -- the image's width
+    Height      : IL.UInt;    -- the image's height
+    Depth       : IL.UInt;    -- the image's depth
+    Bpp         : IL.UByte;   -- bytes per pixel (not bits) of the image
+    Size_Of_Data: IL.UInt;    -- the total size of the data (in bytes)
+    Format      : IL.Enum;    -- image format (in IL.Enum style)
+    Of_Type     : IL.Enum;    -- image type (in IL.Enum style)
+    Origin      : IL.Enum;    -- origin of the image
+    Palette     : IL.Pointer; -- the image's palette
+    Palette_Type: IL.Enum;    -- palette size
+    Palette_Size: IL.UInt;    -- palette type
+    Cube_Flags  : IL.Enum;    -- flags for what cube map sides are present
+    Num_Next    : IL.UInt;    -- number of images following
+    Num_Mips    : IL.UInt;    -- number of mipmaps
+    Num_Layers  : IL.UInt;    -- number of layers
+  end record
+    with Convention => C;
+
+  type Point_F is
+  record
+    X: Float;
+    Y: Float;
+  end record
+    with Convention => C;
+
+  type Point_I is
+  record
+    X: IL.Int;
+    Y: IL.Int;
+  end record
+    with Convention => C;
 
   --------------------------------------------------------------------------
 
@@ -178,6 +214,10 @@ package Imago.ILU is
   function Gen_Image return IL.UInt
     with Import => True, Convention => StdCall, External_Name => "iluGenImage";
 
+  procedure Get_Image_Info (Item: out Info)
+    with Import => True, Convention => StdCall,
+         External_Name => "iluGetImageInfo";
+
   function  Get_Integer (Mode: in IL.Enum) return IL.Int
     with Import => True, Convention => StdCall,
          External_Name => "iluGetInteger";
@@ -214,6 +254,12 @@ package Imago.ILU is
 
   function Pixelize (Pix_Size: in IL.UInt) return IL.Bool
     with Import => True, Convention => StdCall, External_Name => "iluPixelize";
+
+  procedure Region_F (Points: in IL.Pointer; N: in IL.UInt)
+    with Import => True, Convention => StdCall, External_Name => "iluRegionfv";
+
+  procedure Region_I (Points: in IL.Pointer; N: in IL.UInt)
+    with Import => True, Convention => StdCall, External_Name => "iluRegioniv";
 
   function Replace_Color
     ( Red: in IL.UByte; Green: in IL.UByte;
@@ -281,11 +327,6 @@ package Imago.ILU is
 
   function Wave (Angle: in Float) return IL.Bool
     with Import => True, Convention => StdCall, External_Name => "iluWave";
-
--- Unbounded subprograms:
--- void           iluGetImageInfo(ILinfo *Info);
--- void           iluRegionfv(ILpointf *Points, ILuint n);
--- void           iluRegioniv(ILpointi *Points, ILuint n);
 
   --------------------------------------------------------------------------
 
