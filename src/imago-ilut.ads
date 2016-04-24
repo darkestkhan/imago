@@ -97,104 +97,110 @@ package Imago.ILUT is
 
   --------------------------------------------------------------------------
   -- ImageLib Utility Toolkit Functions.
-  function Disable (Mode: in IL.Enum) return IL.Bool;
+  function Disable (Mode: in IL.Enum) return IL.Bool
+    with Import => True, Convention => StdCall, External_Name => "ilutDisable";
 
-  function Enable (Mode: in IL.Enum) return IL.Bool;
+  function Enable (Mode: in IL.Enum) return IL.Bool
+    with Import => True, Convention => StdCall, External_Name => "ilutEnable";
 
-  function Get_Boolean (Mode: in IL.Enum) return IL.Bool;
+  function Get_Boolean (Mode: in IL.Enum) return IL.Bool
+    with Import => True, Convention => StdCall,
+         External_Name => "ilutGetBoolean";
 
-  procedure Get_Boolean (Mode: in IL.Enum; Param: in IL.Pointer);
-  pragma Inline (Get_Boolean);
+  procedure Get_Boolean (Mode: in IL.Enum; Param: in IL.Pointer)
+    with Import => True, Convention => StdCall,
+         External_Name => "ilutGetBooleanv";
 
-  function Get_Integer (Mode: in IL.Enum) return IL.Int;
+  function Get_Integer (Mode: in IL.Enum) return IL.Int
+    with Import => True, Convention => StdCall,
+         External_Name => "ilutGetInteger";
 
-  procedure Get_Integer (Mode: in IL.Enum; Param: in IL.Pointer);
-  pragma Inline (Get_Integer);
+  procedure Get_Integer (Mode: in IL.Enum; Param: in IL.Pointer)
+    with Import => True, Convention => StdCall,
+         External_Name => "ilutGetIntegerv";
 
-  function Get_String (String_Name: in IL.Enum) return String;
-  pragma Inline (Get_String);
+  function Get_String (String_Name: in IL.Enum) return String
+    with Inline => True;
 
-  procedure Init;
+  procedure Init
+    with Import => True, Convention => StdCall, External_Name => "ilutInit";
 
-  function Is_Disabled (Mode: in IL.Enum) return IL.Bool;
+  function Is_Disabled (Mode: in IL.Enum) return IL.Bool
+    with Import => True, Convention => StdCall,
+         External_Name => "ilutIsDisabled";
 
-  function Is_Enabled (Mode: in IL.Enum) return IL.Bool;
+  function Is_Enabled (Mode: in IL.Enum) return IL.Bool
+    with Import => True, Convention => StdCall,
+         External_Name => "ilutIsEnabled";
 
-  procedure Pop_Attrib;
+  procedure Pop_Attrib
+    with Import => True, Convention => StdCall,
+         External_Name => "ilutPopAttrib";
 
-  procedure Push_Attrib (Bits: in IL.UInt);
+  procedure Push_Attrib (Bits: in IL.UInt)
+    with Import => True, Convention => StdCall,
+         External_Name => "ilutPushAttrib";
 
-  procedure Set_Integer (Mode: in IL.Enum; Param: in IL.Int);
+  procedure Set_Integer (Mode: in IL.Enum; Param: in IL.Int)
+    with Import => True, Convention => StdCall,
+         External_Name => "ilutSetInteger";
 
-  function Renderer (Renderer: in IL.Enum) return IL.Bool;
+  function Renderer (Renderer: in IL.Enum) return IL.Bool
+    with Import => True, Convention => StdCall, External_Name => "ilutRenderer";
 
   -- ImageLib Utility Toolkit's OpenGL Functions.
-  function GL_Bind_Tex_Image return GL.UInt;
+  function GL_Bind_Tex_Image return GL.UInt
+    with Import => True, Convention => StdCall,
+         External_Name => "ilutGLBindTexImage";
 
-  function GL_Bind_Mipmaps return GL.UInt;
+  function GL_Bind_Mipmaps return GL.UInt
+    with Import => True, Convention => StdCall,
+         External_Name => "ilutGLBindMipmaps";
 
-  function GL_Build_Mipmaps return IL.Bool;
+  function GL_Build_Mipmaps return IL.Bool
+    with Import => True, Convention => StdCall,
+         External_Name => "ilutGLBuildMipmaps";
 
-  function GL_Load_Image (File_Name: in String) return GL.UInt;
-  pragma Inline (GL_Load_Image);
+  function GL_Load_Image (File_Name: in String) return GL.UInt
+    with Inline => True;
 
-  function GL_Screen return IL.Bool;
+  function GL_Screen return IL.Bool
+    with Import => True, Convention => StdCall, External_Name => "ilutGLScreen";
 
-  function GL_Screenie return IL.Bool;
+  function GL_Screenie return IL.Bool
+    with Import => True, Convention => StdCall,
+         External_Name => "ilutGLScreenie";
 
   function GL_Save_Image
     ( File_Name: in String; Tex_ID: in GL.UInt
-    ) return IL.Bool;
-  pragma Inline (GL_Save_Image);
+    ) return IL.Bool
+    with Inline => True;
 
   function GL_Sub_Tex
     ( Tex_ID: in GL.UInt; XOff: in IL.UInt; YOff: in IL.UInt
-    ) return IL.Bool;
+    ) return IL.Bool
+    with Import => True, Convention => StdCall,
+         External_Name => "ilutGLSubTex2D";
 
   function GL_Sub_Tex
     ( Tex_ID: in GL.UInt; XOff: in IL.UInt;
       YOff: in IL.UInt; ZOff: in IL.UInt
-    ) return IL.Bool;
-  pragma Inline (GL_Sub_Tex);
+    ) return IL.Bool
+    with Import => True, Convention => StdCall,
+         External_Name => "ilutGLSetTex3D";
 
-  function GL_Set_Tex_2D (Tex_ID: in GL.UInt) return IL.Bool;
+  function GL_Set_Tex_2D (Tex_ID: in GL.UInt) return IL.Bool
+    with Import => True, Convention => StdCall,
+         External_Name => "ilutGLSetTex2D";
 
-  function GL_Set_Tex_3D (Tex_ID: in GL.UInt) return IL.Bool;
+  function GL_Set_Tex_3D (Tex_ID: in GL.UInt) return IL.Bool
+    with Import => True, Convention => StdCall,
+         External_Name => "ilutGLSetTex3D";
 
-  function GL_Tex_Image (Level: in GL.UInt) return IL.Bool;
+  function GL_Tex_Image (Level: in GL.UInt) return IL.Bool
+    with Import => True, Convention => StdCall,
+         External_Name => "ilutGLTexImage";
 
   ---------------------------------------------------------------------------
-
-private
-
-  --------------------------------------------------------------------------
-
-                            -------------------
-                            -- I M P O R T S --
-                            -------------------
-
-  --------------------------------------------------------------------------
-
-  pragma Import (StdCall, Disable, "ilutDisable");
-  pragma Import (StdCall, Enable, "ilutEnable");
-  pragma Import (StdCall, Init, "ilutInit");
-  pragma Import (StdCall, Is_Disabled, "ilutIsDisabled");
-  pragma Import (StdCall, Is_Enabled, "ilutIsEnabled");
-  pragma Import (StdCall, Pop_Attrib, "ilutPopAttrib");
-  pragma Import (StdCall, Push_Attrib, "ilutPushAttrib");
-  pragma Import (StdCall, Set_Integer, "ilutSetInteger");
-  pragma Import (StdCall, Renderer, "ilutRenderer");
-
-  -- OpenGL dependent subprograms
-  pragma Import (StdCall, GL_Bind_Tex_Image, "ilutGLBindTexImage");
-  pragma Import (StdCall, GL_Bind_Mipmaps, "ilutGLBindMipmaps");
-  pragma Import (StdCall, GL_Build_Mipmaps, "ilutGLBuildMipmaps");
-  pragma Import (StdCall, GL_Screen, "ilutGLScreen");
-  pragma Import (StdCall, GL_Screenie, "ilutGLScreenie");
-  pragma Import (StdCall, GL_Set_Tex_2D, "ilutGLSetTex2D");
-  pragma Import (StdCall, GL_Set_Tex_3D, "ilutGLSetTex3D");
-  pragma Import (StdCall, GL_Tex_Image, "ilutGLTexImage");
-
-  --------------------------------------------------------------------------
 
 end Imago.ILUT;

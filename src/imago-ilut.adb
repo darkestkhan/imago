@@ -52,50 +52,11 @@ package body Imago.ILUT is
 
   ---------------------------------------------------------------------------
 
-  function Get_Boolean (Mode: in IL.Enum) return IL.Bool
-  is
-    function ilutGetBoolean (Mode: in IL.Enum) return IL.Bool;
-    pragma Import (StdCall, ilutGetBoolean, "ilutGetBoolean");
-  begin
-    return ilutGetBoolean (Mode);
-  end Get_Boolean;
-
-  ---------------------------------------------------------------------------
-
-  procedure Get_Boolean (Mode: in IL.Enum; Param: in IL.Pointer)
-  is
-    procedure ilutGetBooleanV (Mode: in IL.Enum; Param: in IL.Pointer);
-    pragma Import (StdCall, ilutGetBooleanV, "ilutGetBooleanv");
-  begin
-    ilutGetBooleanV (Mode, Param);
-  end Get_Boolean;
-
-  ---------------------------------------------------------------------------
-
-  function Get_Integer (Mode: in IL.Enum) return IL.Int
-  is
-    function ilutGetInteger (Mode: in IL.Enum) return IL.Int;
-    pragma Import (StdCall, ilutGetInteger, "ilutGetInteger");
-  begin
-    return ilutGetInteger (Mode);
-  end Get_Integer;
-
-  ---------------------------------------------------------------------------
-
-  procedure Get_Integer (Mode: in IL.Enum; Param: in IL.Pointer)
-  is
-    procedure ilutGetIntegerV (Mode: in IL.Enum; Param: in IL.Pointer);
-    pragma Import (StdCall, ilutGetIntegerV, "ilutGetIntegerv");
-  begin
-    ilutGetIntegerV (Mode, Param);
-  end Get_Integer;
-
-  ---------------------------------------------------------------------------
-
   function Get_String (String_Name: in IL.Enum) return String
   is
-    function ilutGetString (String_Name: in IL.Enum) return CStrings.chars_ptr;
-    pragma Import (StdCall, ilutGetString, "ilutGetString");
+    function ilutGetString (String_Name: in IL.Enum) return CStrings.chars_ptr
+      with Import => True, Convention => StdCall,
+           External_Name => "ilutGetString";
   begin
     return IC.To_Ada (CStrings.Value (ilutGetString (String_Name)));
   end Get_String;
@@ -104,8 +65,9 @@ package body Imago.ILUT is
 
   function GL_Load_Image (File_Name: in String) return GL.UInt
   is
-    function ilutGLLoadImage (F: in CStrings.chars_ptr) return GL.UInt;
-    pragma Import (StdCall, ilutGLLoadImage, "ilutGLLoadImage");
+    function ilutGLLoadImage (F: in CStrings.chars_ptr) return GL.UInt
+      with Import => True, Convention => StdCall,
+           External_Name => "ilutGLLoadImage";
 
     Value: GL.UInt;
 
@@ -125,8 +87,9 @@ package body Imago.ILUT is
   is
     function ilutGLSaveImage
       ( F: in CStrings.chars_ptr; Tex_ID: in GL.UInt
-      ) return IL.Bool;
-    pragma Import (StdCall, ilutGLSaveImage, "ilutGLSaveImage");
+      ) return IL.Bool
+      with Import => True, Convention => StdCall,
+           External_Name => "ilutGLSaveImage";
 
     Value: IL.Bool;
 
@@ -137,35 +100,6 @@ package body Imago.ILUT is
     Free (CString);
     return Value;
   end GL_Save_Image;
-
-  ---------------------------------------------------------------------------
-
-  function GL_Sub_Tex
-    ( Tex_ID: in GL.UInt; XOff: in IL.UInt; YOff: in IL.UInt
-    ) return IL.Bool
-  is
-    function ilutGLSubTex2D
-      ( T: in GL.UInt; X: in IL.UInt; Y: in IL.UInt
-      ) return IL.Bool;
-    pragma Import (StdCall, ilutGLSubTex2D, "ilutGLSubTex2D");
-  begin
-    return ilutGLSubTex2D (Tex_ID, XOff, YOff);
-  end GL_Sub_Tex;
-
-  ---------------------------------------------------------------------------
-
-  function GL_Sub_Tex
-    ( Tex_ID: in GL.UInt; XOff: in IL.UInt;
-      YOff: in IL.UInt; ZOff: in IL.UInt
-    ) return IL.Bool
-  is
-    function ilutGLSubTex3D
-      ( T: in GL.UInt; X: in IL.UInt; Y: in IL.UInt; Z: in IL.UInt
-      ) return IL.Bool;
-    pragma Import (StdCall, ilutGLSubTex3D, "ilutGLSubTex3D");
-  begin
-    return ilutGLSubTex3D (Tex_ID, XOff, YOff, ZOff);
-  end GL_Sub_Tex;
 
   ---------------------------------------------------------------------------
 
