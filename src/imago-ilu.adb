@@ -16,7 +16,7 @@
 -- action of contract, negligence or other tortious action, arising out of  --
 -- or in connection with the use or performance of this software.           --
 ------------------------------------------------------------------------------
-with Ada.Unchecked_Deallocation;
+with Ada.Characters.Latin_1;
 
 with Interfaces.C;
 with Interfaces.C.Strings;
@@ -31,19 +31,9 @@ package body Imago.ILU is
 
   --------------------------------------------------------------------------
 
+  package ASCII renames Ada.Characters.Latin_1;
   package IC renames Interfaces.C;
   package CStrings renames Interfaces.C.Strings;
-
-  --------------------------------------------------------------------------
-
-                      ---------------------------------
-                      -- I N S T A N T I A T I O N S --
-                      ---------------------------------
-
-  --------------------------------------------------------------------------
-
-  procedure Free is new
-    Ada.Unchecked_Deallocation (IC.char_array, CStrings.char_array_access);
 
   --------------------------------------------------------------------------
 
@@ -77,18 +67,13 @@ package body Imago.ILU is
 
   function Load_Image (File_Name: in String) return IL.UInt
   is
-    function iluLoadImage (F: in CStrings.chars_ptr) return IL.UInt
+    function iluLoadImage (F: in IL.Pointer) return IL.UInt
       with Import => True, Convention => StdCall,
            External_Name => "iluLoadImage";
 
-    Value: IL.UInt;
-
-    CString: CStrings.char_array_access :=
-      new IC.char_array'(IC.To_C (File_Name));
+    CString: constant String := File_Name & ASCII.NUL;
   begin
-    Value := iluLoadImage (CStrings.To_Chars_Ptr (CString));
-    Free (CString);
-    return Value;
+    return iluLoadImage (CString'Address);
   end Load_Image;
 
   ------------------------------------------------------------------

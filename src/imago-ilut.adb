@@ -16,7 +16,7 @@
 -- action of contract, negligence or other tortious action, arising out of  --
 -- or in connection with the use or performance of this software.           --
 ------------------------------------------------------------------------------
-with Ada.Unchecked_Deallocation;
+with Ada.Characters.Latin_1;
 
 with Interfaces.C;
 with Interfaces.C.Strings;
@@ -30,21 +30,11 @@ package body Imago.ILUT is
 
   ---------------------------------------------------------------------------
 
+  package ASCII renames Ada.Characters.Latin_1;
   package IC renames Interfaces.C;
   package CStrings renames Interfaces.C.Strings;
 
   --------------------------------------------------------------------------
-
-                      ---------------------------------
-                      -- I N S T A N T I A T I O N S --
-                      ---------------------------------
-
-  --------------------------------------------------------------------------
-
-  procedure Free is new
-    Ada.Unchecked_Deallocation (IC.char_array, CStrings.char_array_access);
-
-  ---------------------------------------------------------------------------
 
                   -------------------------------------------
                   -- S U B P R O G R A M ' S   B O D I E S --
@@ -65,18 +55,13 @@ package body Imago.ILUT is
 
   function GL_Load_Image (File_Name: in String) return GL.UInt
   is
-    function ilutGLLoadImage (F: in CStrings.chars_ptr) return GL.UInt
+    function ilutGLLoadImage (F: in IL.Pointer) return GL.UInt
       with Import => True, Convention => StdCall,
            External_Name => "ilutGLLoadImage";
 
-    Value: GL.UInt;
-
-    CString: CStrings.char_array_access :=
-      new IC.char_array'(IC.To_C (File_Name));
+    CString: constant String := File_Name & ASCII.NUL;
   begin
-    Value := ilutGLLoadImage (CStrings.To_Chars_Ptr (CString));
-    Free (CString);
-    return Value;
+    return ilutGLLoadImage (CString'Address);
   end GL_Load_Image;
 
   ---------------------------------------------------------------------------
@@ -86,19 +71,14 @@ package body Imago.ILUT is
     ) return IL.Bool
   is
     function ilutGLSaveImage
-      ( F: in CStrings.chars_ptr; Tex_ID: in GL.UInt
+      ( F: in IL.Pointer; Tex_ID: in GL.UInt
       ) return IL.Bool
       with Import => True, Convention => StdCall,
            External_Name => "ilutGLSaveImage";
 
-    Value: IL.Bool;
-
-    CString: CStrings.char_array_access :=
-      new IC.char_array'(IC.To_C (File_Name));
+    CString: constant String := File_Name & ASCII.NUL;
   begin
-    Value := ilutGLSaveImage (CStrings.To_Chars_Ptr (CString), Tex_ID);
-    Free (CString);
-    return Value;
+    return ilutGLSaveImage (CString'Address, Tex_ID);
   end GL_Save_Image;
 
   ---------------------------------------------------------------------------
