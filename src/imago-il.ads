@@ -711,6 +711,9 @@ package Imago.IL is
     )
     with Import => True, Convention => StdCall, External_Name => "ilSetPixels";
 
+  procedure Set_String (Mode: in Enum; Value: in String)
+    with Inline => True;
+
   procedure Shut_Down
     with Import => True, Convention => StdCall, External_Name => "ilShutDown";
 
@@ -749,7 +752,6 @@ package Imago.IL is
 --              ( fOpenRProc, fCloseRProc, fEofProc, fGetcProc,
 --                fReadProc, fSeekRProc, fTellRProc
 --              );
--- void       ilSetString(ILenum Mode, const char *String);
 -- void       ilSetWrite
 --              ( fOpenWProc, fCloseWProc, fPutcProc,
 --                fSeekWProc, fTellWProc, fWriteProc

@@ -16,6 +16,7 @@
 -- action of contract, negligence or other tortious action, arising out of  --
 -- or in connection with the use or performance of this software.           --
 ------------------------------------------------------------------------------
+with Ada.Characters.Latin_1;
 with Ada.Unchecked_Deallocation;
 
 with Interfaces.C;
@@ -31,6 +32,7 @@ package body Imago.IL is
 
   --------------------------------------------------------------------------
 
+  package ASCII renames Ada.Characters.Latin_1;
   package IC renames Interfaces.C;
   package CStrings renames Interfaces.C.Strings;
 
@@ -329,6 +331,19 @@ package body Imago.IL is
   end Save_Pal;
 
   --------------------------------------------------------------------------
+
+  procedure Set_String (Mode: in Enum; Value: in String)
+  is
+    procedure ilSetString (Mode : in Enum; Value: in Pointer)
+      with Import => True, Convention => StdCall,
+           External_Name => "ilSetString";
+
+    CString: constant String := Value & ASCII.NUL;
+  begin
+    ilSetString (Mode, CString'Address);
+  end Set_String;
+
+  ---------------------------------------------------------------------------
 
   function Type_From_Ext (File_Name: in String) return Enum
   is
