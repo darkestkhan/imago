@@ -69,5 +69,6 @@ then
   make_tests
   run_tests
 elif test $1 = "clean"
+then
   clean
 fi
