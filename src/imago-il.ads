@@ -356,11 +356,6 @@ package Imago.IL is
 
   --------------------------------------------------------------------------
 
-  -- FIXME/TODO:  typedefs of pointers to functions are not bound.
-  --              This is preventing against binding to last functions.
-
-  --------------------------------------------------------------------------
-
                         ---------------------------
                         -- S U B P R O G R A M S --
                         ---------------------------
@@ -739,27 +734,6 @@ package Imago.IL is
 
   function Type_Func (Mode: in Enum) return Bool
     with Import => True, Convention => StdCall, External_Name => "ilTypeFunc";
-
--- Unbound subprograms:
--- ILenum     ilDetermineTypeF(ILHANDLE File);
--- ILboolean  ilIsValidF(ILenum Type, ILHANDLE File);
--- ILboolean  ilLoadF(ILenum Type, ILHANDLE File);
--- ILboolean  ilRegisterLoad(ILconst_string Ext, IL_LOADPROC Load);
--- ILboolean  ilRegisterSave(ILconst_string Ext, IL_SAVEPROC Save);
--- ILuint     ilSaveF(ILenum Type, ILHANDLE File);
--- void       ilSetMemory(mAlloc, mFree);
--- void       ilSetRead
---              ( fOpenRProc, fCloseRProc, fEofProc, fGetcProc,
---                fReadProc, fSeekRProc, fTellRProc
---              );
--- void       ilSetWrite
---              ( fOpenWProc, fCloseWProc, fPutcProc,
---                fSeekWProc, fTellWProc, fWriteProc
---              );
--- ILboolean  ilLoadDataF
---              ( ILHANDLE File, ILuint Width, ILuint Height,
---                ILuint Depth, ILubyte Bpp
---              );
 
   --------------------------------------------------------------------------
 

@@ -1,4 +1,4 @@
-[Incomplete] Ada binding to DevIL library.
+Ada binding to DevIL library.
 
 This library tries to be as close to original API as possible, while using
 Ada types whenever possible. It is under ISC license. Full list of authors
@@ -8,24 +8,21 @@ Depends on gprbuild (may build with gnatmake but not tested), devil and lumen
 (lumen is used for ILUT). [on Debian you can install libdevil-dev to satisfy
 DevIL dependency]
 
-When linking against devil don't forget to add "-lIL", "-lILU" and "-lILUT"
-flags.
-
-Following subprograms are still not bound:
-  ILenum	ilDetermineTypeF(ILHANDLE File);
-  ILboolean ilIsValidF(ILenum Type, ILHANDLE File);
-  ILboolean ilLoadF(ILenum Type, ILHANDLE File);
-  ILboolean ilRegisterLoad(ILconst_string Ext, IL_LOADPROC Load);
-  ILboolean ilRegisterSave(ILconst_string Ext, IL_SAVEPROC Save);
-  ILuint    ilSaveF(ILenum Type, ILHANDLE File);
-  void      ilSetMemory(mAlloc, mFree);
-  void      ilSetRead(fOpenRProc, fCloseRProc, fEofProc, fGetcProc, fReadProc, fSeekRProc, fTellRProc);
-  void      ilSetString(ILenum Mode, const char *String);
-  void      ilSetWrite(fOpenWProc, fCloseWProc, fPutcProc, fSeekWProc, fTellWProc, fWriteProc);
-  ILboolean ilLoadDataF(ILHANDLE File, ILuint Width, ILuint Height, ILuint Depth, ILubyte Bpp);
-  void      iluGetImageInfo(ILinfo *Info);
-  void      iluRegionfv(ILpointf *Points, ILuint n);
-  void      iluRegioniv(ILpointi *Points, ILuint n);
+I have no plans of binding to following subprograms (unless someone will
+actually need them):
+  ILenum	    ilDetermineTypeF (ILHANDLE File);
+  ILboolean   ilIsValidF (ILenum Type, ILHANDLE File);
+  ILboolean   ilLoadF (ILenum Type, ILHANDLE File);
+  ILboolean   ilRegisterLoad (ILconst_string Ext, IL_LOADPROC Load);
+  ILboolean   ilRegisterSave (ILconst_string Ext, IL_SAVEPROC Save);
+  ILuint      ilSaveF (ILenum Type, ILHANDLE File);
+  void        ilSetMemory (mAlloc, mFree);
+  void        ilSetRead (fOpenRProc, fCloseRProc, fEofProc, fGetcProc,
+                         fReadProc, fSeekRProc, fTellRProc);
+  void        ilSetWrite (fOpenWProc, fCloseWProc, fPutcProc,
+                          fSeekWProc, fTellWProc, fWriteProc);
+  ILboolean   ilLoadDataF (ILHANDLE File, ILuint Width, ILuint Height,
+                         ILuint Depth, ILubyte Bpp);
 
 To build with different than default CPU switches add "-XCPU=switches" to
 gprbuild command. Defualt CPU switches are: "-march=native -fPIC"
